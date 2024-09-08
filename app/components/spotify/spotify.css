@@ -1,0 +1,110 @@
+.william__spotify {
+  width: 100%;
+  margin-top: -2rem;
+  margin-bottom: 6rem;
+}
+
+.william__spotify-container {
+  border: solid 1px #333;
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.william__spotify-container h1 {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.william__spotify-container-header {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.william__spotify-songscontainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-evenly;
+}
+
+.william__spotify-track {
+  width: 15%;
+  justify-content: center;
+  align-items: center;
+}
+
+.william__spotify-track img {
+  width: 50%;
+  border-radius: 10px;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+}
+
+.william__spotify-track h2 {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  align-items: center;
+  color: #ddd;
+}
+
+
+.william__spotify-track p {
+  font-family: var(--font-family);  
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  align-items: center;
+  color: #ddd;
+}
+
+@media screen and (max-width: 1000px) {
+  .william__spotify-track h2,
+  .william__spotify-track p {
+    display: none;
+  }
+
+  .william__spotify-track img {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+
+  .william__spotify-songscontainer {
+    gap: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .william__spotify-track h2 {
+    font-size: 15px;
+    line-height: 15px;
+  }
+  .william__spotify-track p {
+    font-size: 12px;
+    line-height: 12px;
+  }
+}
+
+@media screen and (min-width: 1800px) {
+
+}
+
+@media screen and (min-width: 2300px) {
+
+}

@@ -1,0 +1,97 @@
+.william__showcase-button {
+  padding: 0.5rem 1rem;
+  color: #000;
+  background: #fff;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 25px;
+  border-radius: 20px;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.william__showcase-modal {
+  width: 60%;
+  margin-top: 6rem;
+  background-color: #1A1A1A;
+  border-radius: 10px;
+  height: 70vh;
+  overflow: auto;
+  box-shadow: 4px 4px 4px rgb(100,100,100,0.3) ;
+  position: relative;
+}
+
+.william__showcase-modal_closeButton {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  height: 2rem;
+  width: 2rem;
+  background-color: rgb(87, 87, 87);
+  border-radius: 50%;
+  border: 0;
+  position: fixed;
+  cursor: pointer;
+}
+
+.william__showcase-modal_closeButton svg {
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.william__showcase-modal_closeImage {
+  margin-top: 0.25rem;
+  margin-left: 0.25rem;
+  width: 20px;
+  background-color: none;
+  cursor: pointer;
+}
+
+.william__showcase-modal-image {
+  object-fit: contain;
+  max-width: 100%;
+}
+
+.william__showcase-modal-document {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.william__showcase-modal-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+
+.william__showcase-modal p {
+  font-family: var(--font-family);
+  font-weight: 200;
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  text-align: center;
+  align-items: center;
+  margin-top: 2rem;
+  color: #b5b5b5;
+}
+
+.william__showcase-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: #000000e1;
+  backdrop-filter: blur(5px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-y: hidden;
+}

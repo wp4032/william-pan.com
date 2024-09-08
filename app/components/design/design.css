@@ -1,0 +1,73 @@
+.anchor {
+  position: absolute;
+  top: -200px;
+  left: 0px;
+}
+
+.william__design-container {
+  position: relative;
+  z-index: 500;
+  display: column;
+  align-items: flex-start;
+  margin-top: 6rem;
+  border: solid 1px rgb(255,255,255,0.5);
+  border-radius: 10px;
+  padding: 2rem;
+}
+
+.william__design-title {
+  margin-bottom: 3rem;
+}
+
+.william__design-title h1 {
+  font-family: var(--font-family);
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 30px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  align-items: center;
+  margin-top: 0;
+
+  color: #ffffff;
+}
+
+.william__design-title h2 {
+  font-family: var(--font-family);
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 18px;
+  letter-spacing: 0.01em;
+  text-align: left;
+  align-items: center;
+  margin-top: 0.5rem;
+  color: #b5b5b5;
+}
+
+.william__design-buttons {
+  display: flex;
+  column-gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.william__design-linkedbutton {
+  padding: 0.5rem 1rem;
+  color: #000;
+  background: #fff;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 25px;
+  border-radius: 20px;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+
+@media screen and (max-width: 900px) {
+  .william__design-container {
+    margin-top: 4rem
+  }
+}
