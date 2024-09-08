@@ -8,8 +8,6 @@ import ShowcaseModal from './ShowcaseModal';
 
 interface ShowcasePopupProps {
   buttonText: string;   // Button label
-  title?: string;        // Modal title
-  text?: string;         // Modal text or description
   alt?: string;          // Alt text for the image
   img?: string;          // Image source URL or path
   pdf?: string;          // PDF file source URL or path
@@ -18,7 +16,7 @@ interface ShowcasePopupProps {
 
 // Modal.setAppElement('#root');
 
-const ShowcasePopup: React.FC<ShowcasePopupProps> = ({ buttonText, title, text, alt, img, pdf, mp4 }) => {
+const ShowcasePopup: React.FC<ShowcasePopupProps> = ({ buttonText, alt, img, pdf, mp4 }) => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const close = () => {

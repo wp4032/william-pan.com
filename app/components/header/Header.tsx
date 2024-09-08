@@ -78,7 +78,7 @@ const Header = () => {
                   }}
                   className="william__header-img3"
                 >
-                  <Image src={william_website_3} alt='Artist William'/>
+                  <Image src={william_website_3} alt='Artist William' width={500} height={500}/>
                 </motion.div>
 
                 <motion.div
@@ -102,9 +102,9 @@ const Header = () => {
               </div>
             </div>
             <div className="william__header-image_buffer" />
-            <motion.h2 className="william__header-parallax_text ptext1" style={{ y: ventureParallax, width: "60%", color: ventureParallaxFilter }} animate={{ color: ventureParallaxFilter }}> I remember ... <br /> <b> the globetrotter finding ways to change the world ... </b> </motion.h2>
-            <motion.h2 className="william__header-parallax_text ptext2" style={{ y: scienceParallax, textAlign: "right", width: "75%", color: scienceParallaxFilter }} animate={{ color: scienceParallaxFilter }}> I remember ... <br /> <b> the explorer deep in the realms of knowledge and the unknown … </b> </motion.h2>
-            <motion.h2 className="william__header-parallax_text ptext3" style={{ y: designParallax, textAlign: "right", width: "50%", color: designParallaxFilter }} animate={{ color: designParallaxFilter }}> I remember ... <br /> <b> the painter crafting the masterpiece with the filbert brush … </b> </motion.h2>
+            <motion.h2 className="william__header-parallax_text ptext1" style={{ y: ventureParallax, width: "60%", color: ventureParallaxFilter }} animate={{ color: ventureParallaxFilter.get() }}> I remember ... <br /> <b> the globetrotter finding ways to change the world ... </b> </motion.h2>
+            <motion.h2 className="william__header-parallax_text ptext2" style={{ y: scienceParallax, textAlign: "right", width: "75%", color: scienceParallaxFilter }} animate={{ color: scienceParallaxFilter.get() }}> I remember ... <br /> <b> the explorer deep in the realms of knowledge and the unknown … </b> </motion.h2>
+            <motion.h2 className="william__header-parallax_text ptext3" style={{ y: designParallax, textAlign: "right", width: "50%", color: designParallaxFilter }} animate={{ color: designParallaxFilter.get() }}> I remember ... <br /> <b> the painter crafting the masterpiece with the filbert brush … </b> </motion.h2>
           </div>
 
           <div className="william__header-content__experiences">

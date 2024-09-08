@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react';
 import './skills.css';
-import {CounterAPI} from "counterapi";
 
 const Skills = () => {
   const [count, setCount] = useState(0);

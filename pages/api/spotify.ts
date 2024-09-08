@@ -1,8 +1,31 @@
-// pages/api/spotify.ts
-
 import type { NextApiRequest, NextApiResponse } from 'next';
 import querystring from 'querystring';
 import axios from 'axios';
+
+interface SpotifyArtist {
+  name: string;
+}
+
+interface SpotifyTrack {
+  name: string;
+  external_urls: {
+    spotify: string;
+  };
+  artists: SpotifyArtist[];
+  album: {
+    images: {
+      url: string;
+    }[];
+  };
+}
+
+interface SpotifyRecentlyPlayedItem {
+  track: SpotifyTrack;
+}
+
+interface SpotifyRecentlyPlayedResponse {
+  items: SpotifyRecentlyPlayedItem[];
+}
 
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 const RECENTLY_PLAYED_ENDPOINT = `https://api.spotify.com/v1/me/player/recently-played`;
@@ -34,16 +57,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const accessToken = tokenResponse.data.access_token;
 
     // Fetch recently played tracks using the access token
-    const recentResponse = await axios.get(RECENTLY_PLAYED_ENDPOINT, {
+    const recentResponse = await axios.get<SpotifyRecentlyPlayedResponse>(RECENTLY_PLAYED_ENDPOINT, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
 
-    const tracks = recentResponse.data.items.slice(0, 5).map((recentTrack: any) => ({
+    const tracks = recentResponse.data.items.slice(0, 5).map((recentTrack: SpotifyRecentlyPlayedItem) => ({
       song: recentTrack.track.name,
       songUrl: recentTrack.track.external_urls.spotify,
-      artists: recentTrack.track.artists.map((artist: any) => artist.name).join(', '),
+      artists: recentTrack.track.artists.map((artist: SpotifyArtist) => artist.name).join(', '),
       albumCover: recentTrack.track.album.images[0].url,
     }));
 
