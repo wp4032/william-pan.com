@@ -41,6 +41,18 @@ const Science = () => {
 
       <div>
         <Feature 
+          title='Music Synthesizer with Chord Player, Harmonics, Dynamics, and PMOD Integration' 
+          position=' ' 
+          text='For this project, we designed and implemented a digital music synthesizer capable of playing chords, harmonic tones, and dynamic audio effects. We also integrated a PMOD numpad for real-time note control. The system was implemented using Verilog and simulated on an FPGA.'/>
+        <div className="william__science-buttons">
+          <a href="https://github.com/wp4032/musicPlayerFPGA">  <button className="william__ventures-linkedbutton"> Github </button>  </a> 
+          <div className="william__science-buttons">
+        </div>
+        </div>
+      </div>
+
+      <div>
+        <Feature 
           title='Moonwalker Brain Computer Interface' 
           position='CS 107E Final Project @ Stanford University' 
           text='Inspired by CTRL Labs, Moonwalker reads EMG signals from the wrist to allow for seamless interaction between the real and digital world. Truly fullstack (designed wrist band, circuitry, backend control, frontend software).' />
