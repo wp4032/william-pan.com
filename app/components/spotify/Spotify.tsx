@@ -144,7 +144,7 @@ const Spotify = () => {
   }, []);
 
   return (
-    <div className="william__spotify section__padding">
+    <div className="william__spotify section__padding max-w-7xl mx-auto">
       <div className="william__spotify-container">
         <div className="william__spotify-container-header">
           <h1> Recently played on Spotify </h1>

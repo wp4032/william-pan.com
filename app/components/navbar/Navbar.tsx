@@ -4,7 +4,7 @@ import { RiMenu3Line, RiCloseLine } from 'react-icons/ri';
 import { motion } from 'framer-motion'
 import './navbar.css'
 import Image from 'next/image';
-import Logo from '/public/logo_white.png'
+import Logo from '@/public/logo_white.png'
 
 import React from 'react'
 
@@ -36,7 +36,15 @@ const Navbar = () => {
         </div>
       </div>
       <div className="william__navbar-sign">
-        <a href="mailto: williampan@stanford.edu"> <motion.button whileHover={{scale: 1.05}} whileTap={{scale: 0.95}} type="button">Contact</motion.button> </a>
+        <a href="mailto: williampan@stanford.edu">
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            style={{ display: 'inline-block' }}
+          >
+            <button>Contact</button>
+          </motion.div>
+        </a>
       </div>
       <div className="william__navbar-menu">
         {toggleMenu

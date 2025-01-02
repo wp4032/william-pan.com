@@ -4,10 +4,11 @@ import React from 'react'
 import ContactForm from '../contactForm/ContactForm'
 import './footer.css';
 import Image from 'next/image';
-import x from '/public/social/x.png'
-import spotify from '/public/social/spotify.png'
-import linkedin from '/public/social/linkedin.png'
-import logo_white from '/public/logo_white.png'
+import x from '@/public/social/x.png'
+import spotify from '@/public/social/spotify.png'
+import linkedin from '@/public/social/linkedin.png'
+import logo_white from '@/public/logo_white.png'
+
 
 const Footer = () => {
 

@@ -21,7 +21,7 @@ const Skills = () => {
   }, []);
 
   return (
-    <div className="william__misc section__padding">
+    <div className="william__misc section__padding max-w-7xl mx-auto">
       <div className='william__skills'>
 
         <div className="william__skills-columns">

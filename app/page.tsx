@@ -9,10 +9,8 @@ import Footer from './components/footer/Footer';
 
 export default function Home() {
   return (
-    <div className='w-screen'>
-      <div>
-        <Navbar />
-      </div>
+    <div>
+      <Navbar />
       <Header />
       <Skills />
       <Spotify />

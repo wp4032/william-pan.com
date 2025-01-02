@@ -12,18 +12,28 @@ const ContactForm = () => {
   }
 
   return (
-    <form className="william__header-content__input gap-6" onSubmit={handleSubmit}>
-      <input id="text" type="text" name="text" placeholder="Ask William about ..." className='text-center rounded-full'></input>
+    <form className="w-4/5 py-8 px-0 flex gap-6" onSubmit={handleSubmit}>
+      <input id="text" type="text" name="text" placeholder="Ask William about ..." className='flex-2 w-full min-h-[50px] font-[--font-family] text-xl leading-[27px] 
+               text-white/50 bg-white/5 border-none px-8 outline-none rounded-full'></input>
       <ValidationError
         prefix="Text"
         field="text"
         errors={state.errors}
       />
-      <motion.button
-        type="submit"
-        disabled={state.submitting}
+      <motion.div
         whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}> Ask </motion.button>
+        whileTap={{ scale: 0.95 }}
+      >
+        <button
+          type="submit"
+          disabled={state.submitting}
+          className='flex-[0.6] w-full min-h-[50px] bg-white text-black rounded-[25px] 
+               font-[--font-family] font-bold text-xl leading-[27px] cursor-pointer 
+               outline-none px-4 border-none text-bold'
+        >
+          Ask
+        </button>
+      </motion.div>
     </form>
   )
 }
