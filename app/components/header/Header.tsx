@@ -22,7 +22,7 @@ const Header = () => {
   // Use this to change the points of where to change colors
   const ventureend = 0.27;
   const scienceend = 0.67;
-  const distance = 1000;
+  const distance = 600;
 
   const grayscalescience = useTransform(
     scrollYProgress,
@@ -100,7 +100,7 @@ const Header = () => {
     <>
       {/* Header Container */}
       <div
-        className="relative w-full py-16 max-w-xl lg:max-w-4xl xl:max-w-7xl mx-auto lg:h-auto"
+        className="relative w-full py-16 max-w-xl lg:max-w-4xl xl:max-w-6xl mx-auto lg:h-auto"
         id="home"
         ref={refdiv}
       >
