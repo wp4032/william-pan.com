@@ -46,12 +46,18 @@ const ShowcasePopup: React.FC<ShowcasePopupProps> = ({ buttonText, alt, img, pdf
         )}
       </AnimatePresence>
 
-      <motion.button
-        className="william__showcase-button"
-        onClick={() => (modalOpen ? close() : open())}
+      <motion.div
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
-        {buttonText}
-      </motion.button>
+        <button
+          type="button"
+          className="px-2 lg:px-3 text-black bg-white font-[--font-family] font-medium text-sm leading-[25px] rounded-[20px] border-0 outline-none cursor-pointer mt-4"
+          onClick={() => (modalOpen ? close() : open())}
+        >
+          {buttonText}
+        </button>
+      </motion.div>
     </div>
   );
 };

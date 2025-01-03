@@ -19,6 +19,70 @@ interface HeroImageProps {
   william_website_3: any;
 }
 
+interface StaticHeroImageProps {
+  william_website_1: any;
+  william_website_2: any;
+  william_website_3: any;
+}
+
+const StaticHeroImage: React.FC<StaticHeroImageProps> = ({
+  william_website_1,
+  william_website_2,
+  william_website_3,
+}) => {
+  return (
+    <div className="w-full flex justify-center">
+      {/* Image Container */}
+      <div className="relative w-[400px] h-[500px] -top-20 z-0">
+        {/* Circles Backdrop */}
+        <div className="absolute inset-0 flex justify-center items-center z-[-1] transform filter contrast-150">
+          <div className="w-[100px] h-[100px] lg:w-[200px] lg:h-[300px] rounded-full blur-[100px] animate-[blurCircle1_10s_infinite_alternate_linear]" />
+          <div className="w-[100px] h-[100px] lg:w-[100px] lg:h-[250px] rounded-full blur-[100px] animate-[blurCircle2_12s_infinite_alternate_linear]" />
+          <div className="w-[100px] h-[100px] lg:w-[150px] lg:h-[300px] rounded-full blur-[100px] animate-[blurCircle3_13s_infinite_alternate_linear]" />
+        </div>
+
+        {/* Three Images */}
+        <div className="relative h-full">
+          {/* Image 3 */}
+          <div className="absolute z-[300] transform top-[-20px] left-[80px] md:left-[80px] w-[250px] md:w-[320px]">
+            <Image
+              src={william_website_3}
+              alt="Artist William"
+              width={500}
+              height={500}
+              draggable="false"
+            />
+          </div>
+
+          {/* Image 1 */}
+          <div className="absolute z-[350] transform top-[30%] left-[20px] md:-left-[20px] w-[200px] md:w-[250px]">
+            <Image
+              src={william_website_1}
+              alt="Scientist William"
+              width={500}
+              height={500}
+              draggable="false"
+            />
+          </div>
+
+          {/* Image 2 */}
+          <div className="absolute z-[400] transform top-[35%] left-[160px] w-[205px] md:w-[250px]">
+            <div style={{ transform: 'rotateY(180deg)' }}>
+              <Image
+                src={william_website_2}
+                alt="Venture William"
+                width={500}
+                height={500}
+                draggable="false"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const HeroImage: React.FC<HeroImageProps> = ({
   grayscaledesign,
   grayscalescience,
@@ -92,11 +156,10 @@ const HeroImage: React.FC<HeroImageProps> = ({
         </div>
       </div>
 
-
       {/* Parallax Text Container */}
       <div className="relative h-full select-none">
         {/* Parallax Text 1 */}
-        <div className="ml-12 lg:w-[80%] xl:w-[70%] text-sm lg:text-xl xl:text-2xl">
+        <div className="ml-12 w-[60%] lg:w-[80%] xl:w-[70%] text-md lg:text-xl xl:text-2xl">
           <motion.div 
             style={{ 
               y: ventureParallax, 
@@ -112,7 +175,7 @@ const HeroImage: React.FC<HeroImageProps> = ({
         </div>
 
         {/* Parallax Text 2 */}
-        <div className="translate-x-full w-[50%] text-sm lg:text-xl xl:text-2xl">
+        <div className="translate-x-3/4 lg:translate-x-full w-[50%] text-sm lg:text-xl xl:text-2xl">
           <motion.h2 
             style={{ 
               y: scienceParallax, 
@@ -129,7 +192,7 @@ const HeroImage: React.FC<HeroImageProps> = ({
         </div>
 
         {/* Parallax Text 3 */}
-        <div className="translate-x-full w-[50%] text-sm lg:text-xl xl:text-2xl">
+        <div className="translate-x-3/4 lg:translate-x-full w-[50%] text-sm lg:text-xl xl:text-2xl">
           <motion.h2 
             style={{ 
               y: designParallax, 
@@ -145,11 +208,9 @@ const HeroImage: React.FC<HeroImageProps> = ({
           </motion.h2>
         </div>
       </div>
-
-      {/* Buffer */}
-      {/* <div className="h-40 w-12" /> */}
     </div>
   );
 };
 
-export default HeroImage; 
+export { HeroImage, StaticHeroImage };
+export default HeroImage;

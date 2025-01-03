@@ -4,6 +4,7 @@ import React from 'react'
 import './science.css';
 import Feature from '../feature/Feature';
 import ShowcasePopup from '../showcasePopup/ShowcasePopup';
+import { motion } from 'framer-motion';
 
 
 const Science = () => {
@@ -45,9 +46,18 @@ const Science = () => {
           position=' ' 
           text='For this project, we designed and implemented a digital music synthesizer capable of playing chords, harmonic tones, and dynamic audio effects. We also integrated a PMOD numpad for real-time note control. The system was implemented using Verilog and simulated on an FPGA.'/>
         <div className="william__science-buttons">
-          <a href="https://github.com/wp4032/musicPlayerFPGA">  <button className="william__ventures-linkedbutton"> Github </button>  </a> 
-          <div className="william__science-buttons">
-        </div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <button
+              type="button"
+              className="px-2 lg:px-3 text-black bg-white font-[--font-family] font-medium text-sm leading-[25px] rounded-[20px] border-0 outline-none cursor-pointer mt-4"
+              onClick={() => window.open('https://github.com/wp4032/musicPlayerFPGA', '_blank')}
+            >
+              GitHub
+            </button>
+          </motion.div>
         </div>
       </div>
 
@@ -56,7 +66,20 @@ const Science = () => {
           title='Moonwalker Brain Computer Interface' 
           position='CS 107E Final Project @ Stanford University' 
           text='Inspired by CTRL Labs, Moonwalker reads EMG signals from the wrist to allow for seamless interaction between the real and digital world. Truly fullstack (designed wrist band, circuitry, backend control, frontend software).' />
-          <a href="https://github.com/wp4032/cs107e-final-project/tree/master">  <button className="william__ventures-linkedbutton"> Github </button>  </a>
+          <div className="william__science-buttons">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <button
+                type="button"
+                className="px-2 lg:px-3 text-black bg-white font-[--font-family] font-medium text-sm leading-[25px] rounded-[20px] border-0 outline-none cursor-pointer mt-4"
+                onClick={() => window.open('https://github.com/wp4032/cs107e-final-project/', '_blank')}
+              >
+                GitHub
+              </button>
+            </motion.div>
+          </div>
       </div>
 
       <div>

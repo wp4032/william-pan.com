@@ -10,7 +10,7 @@ import Image from 'next/image';
 import william_website_1 from '@/public/william-website-1.png';
 import william_website_2 from '@/public/william-website-2.png';
 import william_website_3 from '@/public/william-website-3.png';
-import HeroImage from './HeroImage';
+import HeroImage, { StaticHeroImage } from './HeroImage';
 
 const Header = () => {
   const refdiv = useRef<HTMLDivElement>(null);
@@ -22,7 +22,7 @@ const Header = () => {
   // Use this to change the points of where to change colors
   const ventureend = 0.27;
   const scienceend = 0.67;
-  const distance = 600;
+  const distance = 1000;
 
   const grayscalescience = useTransform(
     scrollYProgress,
@@ -100,15 +100,15 @@ const Header = () => {
     <>
       {/* Header Container */}
       <div
-        className="relative w-full py-16 max-w-xl lg:max-w-4xl xl:max-w-7xl mx-auto min-h-[200vh]"
+        className="relative w-full py-16 max-w-xl lg:max-w-4xl xl:max-w-7xl mx-auto lg:h-auto"
         id="home"
         ref={refdiv}
       >
         {/* Main Content Wrapper */}
-        <div className="flex flex-wrap flex-row justify-start items-start gap-x-8 w-full h-auto">
+        <div className="flex flex-wrap flex-row justify-start items-start lg:items-center gap-x-8 w-full lg:h-auto">
           {/* Title & Contact Form Section */}
-          <div className="w-full lg:w-[48%] mb-16 flex flex-col items-center px-4 lg:px-0">
-            <h1 className="font-bold text-4xl md:text-5xl leading-[44px] md:leading-[52px] tracking-[0.01em] text-center lg:text-left text-white mt-28 max-w-[90%] md:max-w-full">
+          <div className="w-full lg:w-[48%] h-[105vh] lg:h-[95vh] flex flex-col items-center justify-center px-4 lg:px-0">
+            <h1 className="font-bold text-4xl md:text-5xl leading-[44px] md:leading-[52px] tracking-[0.01em] text-center lg:text-left text-white max-w-[90%] md:max-w-full">
               The intersection of innovation, entrepreneurship, engineering, and
               design.
             </h1>
@@ -124,8 +124,7 @@ const Header = () => {
           </div>
 
           {/* Sticky Images & Parallax Text Section */}
-          <div className="w-[100vw] lg:w-[48%] sticky lg:top-1/3 lg:h-[calc(full-500px)]">
-
+          <div className="invisible lg:visible w-[100vw] lg:w-[48%] sticky lg:top-1/3 h-0 lg:h-auto  mb-0 lg:mb-16">
             <HeroImage
               grayscaledesign={grayscaledesign}
               grayscalescience={grayscalescience}
@@ -143,7 +142,7 @@ const Header = () => {
           </div>
 
           {/* Experiences Section - Desktop */}
-          <div className="hidden lg:block w-[48%]">
+          <div className="hidden lg:visible lg:block w-[48%]">
             <Ventures />
             <Science />
             <Design />
@@ -151,8 +150,18 @@ const Header = () => {
         </div>
       </div>
 
+      {/* <div className="visible lg:invisible w-[100vw] lg:w-[48%] sticky top-1/2 lg:top-1/3 lg:h-[calc(full-400px)] mb-16"> */}
+      <div className="flex relative visible lg:invisible w-screen h-[375px] md:h-[450px] lg:h-0">
+        <StaticHeroImage
+          william_website_1={william_website_1}
+          william_website_2={william_website_2}
+          william_website_3={william_website_3}
+        />
+      </div>
+      
+
       {/* Experiences Section - Mobile */}
-      <div className="block lg:hidden py-16">
+      <div className="block lg:hidden pb-16">
         <div className="flex flex-col items-start max-w-[80%] mx-auto">
           <Ventures />
           <Science />

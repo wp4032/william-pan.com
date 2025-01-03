@@ -1,16 +1,5 @@
 .william__showcase-button {
-  padding: 0.5rem 1rem;
-  color: #000;
-  background: #fff;
-  font-family: var(--font-family);
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 25px;
-  border-radius: 20px;
-  border: 0;
-  outline: none;
-  cursor: pointer;
-  margin-top: 1rem;
+  @apply px-4 py-2 text-black bg-white font-[--font-family] font-medium text-sm leading-[25px] rounded-[20px] border-0 outline-none cursor-pointer mt-4;
 }
 
 .william__showcase-modal {
