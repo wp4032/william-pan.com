@@ -3,7 +3,7 @@
 }
 
 .william__design-container {
-  @apply relative z-[500] flex flex-col items-start mt-24 border border-white/50 rounded-[10px] p-8;
+  @apply relative flex flex-col items-start mt-24 border border-white/50 rounded-[10px] p-8;
 }
 
 .william__design-title {

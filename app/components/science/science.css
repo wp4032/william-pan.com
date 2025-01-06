@@ -6,7 +6,6 @@
 
 .william__science-container {
   position: relative;
-  z-index: 600;
   display: column;
   align-items: flex-start;
   margin-top: 6rem;

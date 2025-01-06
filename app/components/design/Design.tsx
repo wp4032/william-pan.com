@@ -3,12 +3,12 @@
 import React from 'react'
 import './design.css';
 import Feature from '../feature/Feature';
-import ShowcasePopup from '../showcasePopup/ShowcasePopup';
 import { motion } from 'framer-motion';
+import ContentModal from '../modal/ContentModal';
 
 const Design = () => {
   return (
-    <div className="relative z-[500] flex flex-col items-start mt-24 border border-white/50 rounded-[10px] p-8">
+    <div className="relative flex flex-col items-start mt-24 border border-white/50 rounded-[10px] p-8">
       <div className="absolute -top-[200px] left-0" id="design"/>
       <div className="mb-3">
         <h1 className="font-[--font-family] font-bold text-[30px] leading-[30px] tracking-[0.01em] text-left items-center mt-0 text-white">Design</h1>
@@ -21,10 +21,16 @@ const Design = () => {
           position={'ME 102 Final Project @ Stanford University'}
           text='A coin sorter that requires 3 inches of vertical input motion that is reset by a spring. The input motion is further translated into rotational motion to sort the coins into sorted compartments.'/>
         <div className="flex gap-4 flex-wrap">
-          <ShowcasePopup 
-            buttonText='Presentation' 
-            pdf='coinception.pdf' 
-            alt='Coinception'/>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ContentModal 
+              title="Presentation"
+              contentType="pdf"
+              contentUrl="/coinception.pdf"
+            />
+          </motion.div>
         </div>
       </div>
 
@@ -53,10 +59,16 @@ const Design = () => {
           title='Dreams Don&#39;t Die Bicycle' 
           text='A vintage 1970&#39;s Centurion LeMans Mixte bicycle refurbrished, painted, and cleaned as the 2022 Dreams Don&#39;t Die Bicycle used for transport at Stanford University Campus.'/>
         <div className="flex gap-4 flex-wrap">
-          <ShowcasePopup 
-            buttonText='Video' 
-            mp4='DreamsDontDieBike.mp4'
-            alt='DDDBike'/>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ContentModal 
+              title="Video"
+              contentType="video"
+              contentUrl="/DreamsDontDieBike.mp4"
+            />
+          </motion.div>
         </div>
       </div>
 
@@ -65,10 +77,16 @@ const Design = () => {
           title='Dreams Don&#39;t Die' 
           text='A zine made in the summer of 2021 documenting the events and thoughts presented by William&#39;s alter-ego racing through a modern psychedelic iridescent metropolis.'/>
         <div className="flex gap-4 flex-wrap">
-          <ShowcasePopup 
-            buttonText='Excerpt of Zine' 
-            pdf='DreamsDontDie.pdf' 
-            alt='DDDZine'/>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ContentModal 
+              title="Excerpt of Zine"
+              contentType="pdf"
+              contentUrl="/DreamsDontDie.pdf"
+            />
+          </motion.div>
         </div>
       </div>
     </div>

@@ -3,8 +3,8 @@
 import React from 'react'
 import './ventures.css';
 import Feature from '../feature/Feature';
-import ShowcasePopup from '../showcasePopup/ShowcasePopup';
 import { motion } from 'framer-motion';
+import ContentModal from '../modal/ContentModal';
 
 const Ventures = () => {
   return (
@@ -104,22 +104,46 @@ const Ventures = () => {
           position='Co-Founder & Chief Executive Officer' 
           text='health{hacks} was a 48 hour healthcare innovation event dedicated to connecting people from around the world to change the world. Our goal is to bring people from a wide variety of backgrounds and fields to provide new perspectives and collaborate on projects.' link='https://health-hacks.tech/'/>
         <div className="william__ventures-buttons">
-          <ShowcasePopup 
-            buttonText='health{hacks} 2023' 
-            pdf='/healthhacks2023-recap.pdf' 
-            alt='health{hacks} 2023'/>
-          <ShowcasePopup 
-            buttonText='health{hacks} 2022' 
-            img='/healthhacks2022-recap.pdf'
-            alt='health{hacks} 2022'/>
-          <ShowcasePopup 
-            buttonText='health{hacks} 2021' 
-            pdf='/healthhacks2021-recap.pdf'
-            alt='health{hacks} 2021'/>  
-          <ShowcasePopup 
-            buttonText='health{hacks} 2020' 
-            pdf='/healthhacks2020-recap.pdf'
-            alt='health{hacks} 2021'/> 
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ContentModal 
+              title="health{hacks} 2023"
+              contentType="pdf"
+              contentUrl="/healthhacks2023-recap.pdf"
+            />
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ContentModal 
+              title="health{hacks} 2022"
+              contentType="image"
+              contentUrl="/healthhacks2022-recap.jpg"
+            />
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ContentModal 
+              title="health{hacks} 2021"
+              contentType="pdf"
+              contentUrl="/healthhacks2021-recap.pdf"
+            />
+          </motion.div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <ContentModal 
+              title="health{hacks} 2020"
+              contentType="pdf"
+              contentUrl="/healthhacks2020-recap.pdf"
+            />
+          </motion.div>
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

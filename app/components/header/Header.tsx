@@ -1,12 +1,11 @@
 'use client';
 
 import React, { useRef, RefObject } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { useScroll, useTransform } from 'framer-motion';
 import Ventures from '../ventures/Ventures';
 import Science from '../science/Science';
 import Design from '../design/Design';
 import ContactForm from '../contactForm/ContactForm';
-import Image from 'next/image';
 import william_website_1 from '@/public/william-website-1.png';
 import william_website_2 from '@/public/william-website-2.png';
 import william_website_3 from '@/public/william-website-3.png';

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import './spotify.css';
 
 interface Track {
@@ -21,12 +22,17 @@ const SpotifyTracks: React.FC<SpotifyTracksProps> = ({ tracks }) => {
       {tracks.map((recentTrack, index) => (
         <div key={index} className="william__spotify-track">
           <a href={recentTrack.songUrl}>
-            <motion.img 
-              src={recentTrack.albumCover} 
-              alt={recentTrack.song} 
-              whileHover={{ scale: 1.1 }} 
-              whileTap={{ scale: 0.9 }} 
-            />
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <Image
+                src={recentTrack.albumCover}
+                alt={recentTrack.song}
+                width={64}
+                height={64}
+              />
+            </motion.div>
           </a>
           <h2>{recentTrack.song}</h2>
           <p className='mt-2'>{recentTrack.artists}</p>

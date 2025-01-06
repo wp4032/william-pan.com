@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion, MotionValue } from 'framer-motion';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 
 interface HeroImageProps {
   grayscaledesign: MotionValue<string>;
@@ -14,15 +14,15 @@ interface HeroImageProps {
   ventureParallaxFilter: MotionValue<string>;
   scienceParallaxFilter: MotionValue<string>;
   designParallaxFilter: MotionValue<string>;
-  william_website_1: any;
-  william_website_2: any;
-  william_website_3: any;
+  william_website_1: StaticImageData;
+  william_website_2: StaticImageData;
+  william_website_3: StaticImageData;
 }
 
 interface StaticHeroImageProps {
-  william_website_1: any;
-  william_website_2: any;
-  william_website_3: any;
+  william_website_1: StaticImageData;
+  william_website_2: StaticImageData;
+  william_website_3: StaticImageData;
 }
 
 const StaticHeroImage: React.FC<StaticHeroImageProps> = ({

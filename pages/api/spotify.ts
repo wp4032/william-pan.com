@@ -72,7 +72,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     // Return the tracks data to the client
     res.status(200).json({ tracks });
-  } catch (error) {
+  } catch {
     res.status(500).json({ error: 'Failed to fetch Spotify data' });
   }
 }
