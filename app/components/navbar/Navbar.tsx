@@ -14,11 +14,11 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ setToggleMenu }) => (
   <>
-    <p><a href="#home" onClick={() => setToggleMenu(false)}>Home</a></p>
-    <p><a href="#ventures" onClick={() => setToggleMenu(false)}>Ventures</a></p>
-    <p><a href="#science" onClick={() => setToggleMenu(false)}>Science</a></p>
-    <p><a href="#design" onClick={() => setToggleMenu(false)}>Design</a></p>
-    {/* <p><a href="#news" onClick={() => setToggleMenu(false)}>News</a></p> */}
+    <p><a href="/" onClick={() => setToggleMenu(false)}>Home</a></p>
+    <p><a href="/#ventures" onClick={() => setToggleMenu(false)}>Ventures</a></p>
+    <p><a href="/#science" onClick={() => setToggleMenu(false)}>Science</a></p>
+    <p><a href="/#design" onClick={() => setToggleMenu(false)}>Design</a></p>
+    <p><a href="/blog" onClick={() => setToggleMenu(false)}>Blog</a></p>
   </>
 );
 
