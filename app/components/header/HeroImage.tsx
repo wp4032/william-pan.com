@@ -23,13 +23,17 @@ interface StaticHeroImageProps {
   william_website_1: StaticImageData;
   william_website_2: StaticImageData;
   william_website_3: StaticImageData;
+  blackAndWhite?: boolean;
 }
 
 const StaticHeroImage: React.FC<StaticHeroImageProps> = ({
   william_website_1,
   william_website_2,
   william_website_3,
+  blackAndWhite = false,
 }) => {
+  const imageFilter = blackAndWhite ? 'grayscale(100%)' : 'none';
+
   return (
     <div className="w-full flex justify-center">
       {/* Image Container */}
@@ -45,29 +49,33 @@ const StaticHeroImage: React.FC<StaticHeroImageProps> = ({
         <div className="relative h-full">
           {/* Image 3 */}
           <div className="absolute z-[300] transform top-[-20px] left-[80px] md:left-[80px] w-[250px] md:w-[320px]">
-            <Image
-              src={william_website_3}
-              alt="Artist William"
-              width={500}
-              height={500}
-              draggable="false"
-            />
+            <div style={{ filter: imageFilter }}>
+              <Image
+                src={william_website_3}
+                alt="Artist William"
+                width={500}
+                height={500}
+                draggable="false"
+              />
+            </div>
           </div>
 
           {/* Image 1 */}
           <div className="absolute z-[350] transform top-[30%] left-[20px] md:-left-[20px] w-[200px] md:w-[250px]">
-            <Image
-              src={william_website_1}
-              alt="Scientist William"
-              width={500}
-              height={500}
-              draggable="false"
-            />
+            <div style={{ filter: imageFilter }}>
+              <Image
+                src={william_website_1}
+                alt="Scientist William"
+                width={500}
+                height={500}
+                draggable="false"
+              />
+            </div>
           </div>
 
           {/* Image 2 */}
           <div className="absolute z-[400] transform top-[35%] left-[160px] w-[205px] md:w-[250px]">
-            <div style={{ transform: 'rotateY(180deg)' }}>
+            <div style={{ transform: 'rotateY(180deg)', filter: imageFilter }}>
               <Image
                 src={william_website_2}
                 alt="Venture William"

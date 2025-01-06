@@ -13,7 +13,7 @@ const ContactForm = () => {
 
   return (
     <form className="w-4/5 py-4 sm:py-8 px-0 flex gap-6" onSubmit={handleSubmit}>
-      <input id="text" type="text" name="text" placeholder="Ask William about ..." className='flex-2 w-full min-h-[35px] lg:min-h-[50px] font-[--font-family] text-md lg:text-xl leading-[27px] 
+      <input id="text" type="text" name="text" placeholder="Ask William ..." className='flex-2 w-full min-h-[35px] lg:min-h-[50px] font-[--font-family] text-md lg:text-xl leading-[27px] 
                text-white/50 bg-white/5 border-none px-8 outline-none rounded-full'></input>
       <ValidationError
         prefix="Text"

@@ -19,8 +19,8 @@ const Header = () => {
   });
 
   // Use this to change the points of where to change colors
-  const ventureend = 0.27;
-  const scienceend = 0.67;
+  const ventureend = 0.36;
+  const scienceend = 0.83;
   const distance = 600;
 
   const grayscalescience = useTransform(
@@ -73,26 +73,26 @@ const Header = () => {
 
   const designParallax = useTransform(
     scrollYProgress,
-    [0.8, 0.82, 0.98, 1],
+    [0.83, 0.85, 0.98, 1],
     [0, -distance / 2 + 305, -distance / 2 + 305, -distance]
   );
 
   const ventureParallaxFilter = useTransform(
     scrollYProgress,
-    [0.1, 0.101, 0.12],
-    ['transparent', 'rgb(0,0,0)', 'rgb(255,255,255)']
+    [0.1, 0.12, 0.36, 0.38],
+    ['rgb(0,0,0,0)', 'rgb(255,255,255)', 'rgb(255,255,255)', 'rgb(0,0,0,0)']
   );
 
   const scienceParallaxFilter = useTransform(
     scrollYProgress,
-    [0.36, 0.361, 0.38],
-    ['transparent', 'rgb(0,0,0)', 'rgb(255,255,255)']
+    [0.36, 0.38, 0.75, 0.77], 
+    ['rgb(0,0,0,0)', 'rgb(255,255,255)', 'rgb(255,255,255)', 'transparent']
   );
 
   const designParallaxFilter = useTransform(
     scrollYProgress,
-    [0.75, 0.751, 0.77],
-    ['transparent', 'rgb(0,0,0)', 'rgb(255,255,255)']
+    [0.83, 0.85, 0.98, 1],
+    ['rgb(0,0,0,0)', 'rgb(255,255,255)', 'rgb(255,255,255)', 'rgb(0,0,0,0)']
   );
 
   return (
@@ -150,7 +150,7 @@ const Header = () => {
       </div>
 
       {/* <div className="visible lg:invisible w-[100vw] lg:w-[48%] sticky top-1/2 lg:top-1/3 lg:h-[calc(full-400px)] mb-16"> */}
-      <div className="flex relative visible lg:invisible w-screen h-[375px] md:h-[450px] lg:h-0">
+      <div className="flex relative visible lg:invisible w-full lg:w-0 h-[375px] md:h-[450px] lg:h-0">
         <StaticHeroImage
           william_website_1={william_website_1}
           william_website_2={william_website_2}

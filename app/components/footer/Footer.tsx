@@ -21,8 +21,8 @@ const Footer = () => {
       <div className="william__footer-links">
         <div className="william__footer-links_logo">
           <Image src={logo_white} alt="logo"/>
-          <p><b>Email:</b> williampan@stanford.edu <br />
-            <b>Phone:</b> (714) 633 2888</p>
+            <p><b>Email:</b> <a href="mailto:williampan@stanford.edu">williampan@stanford.edu</a> <br />
+            <b>Phone:</b> <a href="tel:+17146332888">(714) 633 2888</a></p>
         </div>
         <div className="william__footer-links_container">
           <div className="william__footer-links_div">
@@ -43,7 +43,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="william__footer-copyright">
-        <p>Copyright © 2024 William Pan. All rights reserved.</p>
+        <p>Copyright © 2025 William Pan. All rights reserved.</p>
       </div>
 
 
