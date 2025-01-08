@@ -18,8 +18,9 @@ import BlogContainer from '@/app/components/sidebar/BlogContainer';
 import 'katex/dist/katex.min.css';
 import { visit } from 'unist-util-visit';
 import '../../components/blog/wp-dark.css';
+import { getAllPosts } from '@/lib/getPosts';
 
-
+const posts = await getAllPosts();
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const { slug } = await params;
@@ -52,7 +53,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
     const contentHtml = processedContent.toString();
 
     return (
-      <BlogContainer home={false}>
+      <BlogContainer home={false} posts={posts}>
         <article className="flex h-full flex-col pb-16 pt-16">
           <div className="flex-auto justify-start max-w-2xl lg:max-w-3xl lg:ml-24">
             <h3 className="text-sm font-light mt-2 text-neutral-400">{matterResult.data.date}</h3>

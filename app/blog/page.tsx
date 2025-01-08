@@ -1,8 +1,11 @@
 import BlogContainer from "@/app/components/sidebar/BlogContainer";
+import { getAllPosts } from '@/lib/getPosts';
+
+const posts = getAllPosts();
 
 export default function BlogHomePage() {
   return (
-    <BlogContainer home={true}>
+    <BlogContainer home={true} posts={posts}>
       <div className="grid auto-rows-min gap-4 md:grid-cols-3">
         <div className="aspect-video rounded-xl bg-muted/50" />
         <div className="aspect-video rounded-xl bg-muted/50" />

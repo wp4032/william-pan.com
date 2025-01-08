@@ -1,8 +1,10 @@
+"use client"
+
 import * as React from "react"
-import { GalleryVerticalEnd } from "lucide-react"
+import { GalleryVerticalEnd, ChevronDown } from "lucide-react"
 import Image from "next/image"
-import fs from 'fs';
-import path from 'path';
+import { usePathname } from 'next/navigation';
+import { getAllPosts } from '@/lib/getPosts';
 
 import {
   Sidebar,
@@ -17,31 +19,23 @@ import {
   SidebarMenuSubItem,
   SidebarRail,
 } from "@/components/ui/sidebar"
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
 
-function getAllPosts() {
-  const postsDirectory = path.join(process.cwd(), 'posts');
-  const allPosts: {title: string, url: string}[] = [];
-
-  const files = fs.readdirSync(postsDirectory);
-
-  files.forEach(file => {
-    if (file.endsWith('.md')) {
-      const id = file.replace(/\.md$/, '');
-      allPosts.push({
-        title: id,
-        url: `/blog/${id}`,
-      });
-    }
-  });
-
-  return allPosts;
+function sanitizeForUrl(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[^a-z0-9\s-]/g, '')
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
 }
 
-const data = {
-  posts: getAllPosts()
-}
+export function AppSidebar({ posts, ...props }: { posts: { title: string, url: string, subheadings: string[] }[] }) {
+  const pathname = usePathname();
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props} collapsible="offcanvas">
       <SidebarHeader>
@@ -77,14 +71,34 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             <SidebarMenuItem>
               <hr className="my-2 border-sidebar-border" />
             </SidebarMenuItem>
-            {data.posts.map((post) => (
-              <SidebarMenuItem key={post.title}>
-                <SidebarMenuButton asChild>
-                  <a href={post.url} className="font-medium">
-                    {post.title}
-                  </a>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
+            {posts.map((post) => (
+              <Collapsible key={post.title} className="group/collapsible" defaultOpen={pathname === post.url}>
+                <SidebarMenuItem>
+                  <CollapsibleTrigger asChild>
+                    <SidebarMenuButton>
+                      <div className="font-medium flex items-center w-full">
+                        <a href={post.url} className="flex-grow">
+                          {post.title}
+                        </a>
+                        <ChevronDown className="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                      </div>
+                    </SidebarMenuButton>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <SidebarMenuSub>
+                      {post.subheadings.map((heading, index) => (
+                        <SidebarMenuSubItem key={index}>
+                          <SidebarMenuSubButton asChild>
+                            <a href={`${post.url}#${sanitizeForUrl(heading)}`} className="text-sm">
+                              {heading}
+                            </a>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  </CollapsibleContent>
+                </SidebarMenuItem>
+              </Collapsible>
             ))}
           </SidebarMenu>
         </SidebarGroup>

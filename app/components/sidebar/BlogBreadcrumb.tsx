@@ -1,13 +1,18 @@
 "use client"
 
-import { usePathname, useSearchParams } from 'next/navigation';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default function BlogBreadcrumb() {
   const pathname = usePathname();
   const pathParts = pathname?.split('/').filter(Boolean);
-  const hash = typeof window !== 'undefined' ? window.location.hash.slice(1) : '';
+  const [hash, setHash] = useState('');
+
+  useEffect(() => {
+    setHash(window.location.hash.slice(1));
+  }, []);
 
   // Assuming the structure is /blog/[slug]#subheading
   const slug = pathParts?.[1] || '';
@@ -28,13 +33,9 @@ export default function BlogBreadcrumb() {
             <>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem className="hidden md:block">
-                {hash ? (
-                  <BreadcrumbLink href={`/blog/${slug}`}>
-                    {slug}
-                  </BreadcrumbLink>
-                ) : (
-                  <BreadcrumbPage>{slug}</BreadcrumbPage>
-                )}
+                <BreadcrumbLink href={`/blog/${slug}`}>
+                  {slug}
+                </BreadcrumbLink>
               </BreadcrumbItem>
             </>
           )}
@@ -42,7 +43,9 @@ export default function BlogBreadcrumb() {
             <>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbPage>{subheading}</BreadcrumbPage>
+                <BreadcrumbLink href={`/blog/${slug}#${subheading}`}>
+                  {subheading}
+                </BreadcrumbLink>
               </BreadcrumbItem>
             </>
           )}

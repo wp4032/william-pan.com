@@ -4,18 +4,21 @@ import { AppSidebar } from "@/app/components/sidebar/Sidebar";
 import { SidebarInset } from "@/components/ui/sidebar";
 import BlogBreadcrumb from "@/app/components/sidebar/BlogBreadcrumb";
 import { CopyButtonScript } from '../blog/CopyButtonScript'
+import { getAllPosts } from '@/lib/getPosts';
 
 interface FlexibleLayoutProps {
   children: React.ReactNode;
   home: boolean;
+  posts: { title: string, url: string, subheadings: string[] }[];
 }
 
-export default function BlogContainer({ children, home }: FlexibleLayoutProps) {
+export default function BlogContainer({ children, home, posts }: FlexibleLayoutProps) {
+
   return (
     <>
       <CopyButtonScript />
       <SidebarProvider>
-        <AppSidebar />
+        <AppSidebar posts={posts}/>
         <SidebarInset>
           {!home && (
             <header className="flex h-16 shrink-0 items-center gap-2 border-b">
