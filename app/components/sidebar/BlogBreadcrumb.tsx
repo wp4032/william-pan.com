@@ -2,6 +2,7 @@
 
 import { usePathname, useSearchParams } from 'next/navigation';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator, BreadcrumbPage } from "@/components/ui/breadcrumb";
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default function BlogBreadcrumb() {
   const pathname = usePathname();
@@ -13,7 +14,9 @@ export default function BlogBreadcrumb() {
   const subheading = hash || '';
 
   return (
-    <div className="flex items-center gap-2 px-6">
+    <div className="flex items-center gap-4 px-4">
+      <SidebarTrigger />
+      <div className="h-6 w-[1px] bg-neutral-800" />
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem className="hidden md:block">
