@@ -8,24 +8,36 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 export default function BlogBreadcrumb({ posts }: { posts: { title: string, url: string, subheadings: string[] }[] }) {
   const pathname = usePathname();
   const pathParts = pathname?.split('/').filter(Boolean);
-  const [hash, setHash] = useState('');
+  const [currentHeading, setCurrentHeading] = useState('');
 
   useEffect(() => {
-    const handleHashChange = () => {
-      setHash(window.location.hash.slice(1));
+    const handleScroll = () => {
+      const headings = document.querySelectorAll('h2');
+      const scrollPosition = window.scrollY + 200; // Offset to account for header
+
+      // Reset currentHeading if scrolled to top
+      if (window.scrollY < 100) {
+        setCurrentHeading('');
+        return;
+      }
+
+      for (let i = headings.length - 1; i > 0; i--) {
+        const heading = headings[i];
+        if (heading.offsetTop <= scrollPosition) {
+          setCurrentHeading(heading.textContent || '');
+          break;
+        }
+      }
     };
 
-    handleHashChange(); // Initial hash
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    handleScroll(); // Initial position
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const slug = pathParts?.[1] || '';
   const currentPost = posts.find(post => post.url === pathname);
   const postTitle = currentPost?.title || '';
-  const currentSubheading = currentPost?.subheadings.find(heading => 
-    heading.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-') === hash
-  );
 
   return (
     <div className="flex items-center gap-4 px-4">
@@ -48,12 +60,12 @@ export default function BlogBreadcrumb({ posts }: { posts: { title: string, url:
               </BreadcrumbItem>
             </>
           )}
-          {currentSubheading && (
+          {currentHeading && (
             <>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbLink href={`/blog/${slug}#${hash}`}>
-                  {currentSubheading}
+                <BreadcrumbLink href={`#${currentHeading.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-')}`}>
+                  {currentHeading}
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </>

@@ -22,7 +22,7 @@ export default function BlogContainer({ children, home, posts }: FlexibleLayoutP
         <AppSidebar posts={safePosts}/>
         <SidebarInset>
           {!home && (
-            <header className="flex h-16 shrink-0 items-center gap-2 border-b sticky top-0 z-10 backdrop-blur-[40px]">
+            <header className="flex h-16 shrink-0 items-center gap-2 border-b sticky top-0 z-10 backdrop-blur-[40px] mx-2">
               <div className="max-w-7xl mx-auto w-full">
                 <BlogBreadcrumb posts={safePosts}/>
               </div>
