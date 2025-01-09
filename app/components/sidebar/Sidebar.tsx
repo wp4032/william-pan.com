@@ -1,10 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { GalleryVerticalEnd, ChevronDown } from "lucide-react"
+import { ChevronDown } from "lucide-react"
 import Image from "next/image"
 import { usePathname } from 'next/navigation';
-import { getAllPosts } from '@/lib/getPosts';
 
 import {
   Sidebar,
@@ -24,6 +23,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible"
+import Link from "next/link";
 
 function sanitizeForUrl(text: string): string {
   return text
@@ -41,7 +41,7 @@ export function AppSidebar({ posts, ...props }: { posts: { title: string, url: s
       const hash = window.location.hash;
       if (hash) {
         const element = document.querySelector(hash);
-        if (element) {
+        if (element && element instanceof HTMLElement) {
           window.scrollTo({
             top: element.offsetTop - 200,
             behavior: 'smooth'
@@ -65,7 +65,7 @@ export function AppSidebar({ posts, ...props }: { posts: { title: string, url: s
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton size="lg" asChild>
-              <a href="/">
+              <Link href="/">
                 <div className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
                   <Image src="/favicon.ico" alt="Favicon" width={16} height={16} />
                 </div>
@@ -73,7 +73,7 @@ export function AppSidebar({ posts, ...props }: { posts: { title: string, url: s
                   <span className="font-semibold">William Pan</span>
                   <span className="">Blog</span>
                 </div>
-              </a>
+              </Link>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -86,9 +86,9 @@ export function AppSidebar({ posts, ...props }: { posts: { title: string, url: s
             </SidebarMenuItem>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <a href="/blog" className="font-medium font-bold">
+                <Link href="/blog" className="font-medium font-bold">
                   Welcome
-                </a>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
             <SidebarMenuItem>
@@ -101,9 +101,9 @@ export function AppSidebar({ posts, ...props }: { posts: { title: string, url: s
 
                     <SidebarMenuButton>
                       <div className="font-medium flex items-center w-full">
-                        <a href={post.url} className="flex-grow">
+                        <Link href={post.url} className="flex-grow">
                           {post.title}
-                        </a>
+                        </Link>
                         <CollapsibleTrigger asChild>
                           <ChevronDown className="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
                         </CollapsibleTrigger>
@@ -115,9 +115,9 @@ export function AppSidebar({ posts, ...props }: { posts: { title: string, url: s
                         {post.subheadings.map((heading, index) => (
                           <SidebarMenuSubItem key={index}>
                             <SidebarMenuSubButton asChild>
-                              <a href={`${post.url}#${sanitizeForUrl(heading)}`} className="text-sm">
+                              <Link href={`${post.url}#${sanitizeForUrl(heading)}`} className="text-sm">
                                 {heading}
-                              </a>
+                              </Link>
                             </SidebarMenuSubButton>
                           </SidebarMenuSubItem>
                         ))}

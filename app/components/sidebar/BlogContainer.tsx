@@ -4,7 +4,6 @@ import { AppSidebar } from "@/app/components/sidebar/Sidebar";
 import { SidebarInset } from "@/components/ui/sidebar";
 import BlogBreadcrumb from "@/app/components/sidebar/BlogBreadcrumb";
 import { CopyButtonScript } from '../blog/CopyButtonScript'
-import { getAllPosts } from '@/lib/getPosts';
 
 interface FlexibleLayoutProps {
   children: React.ReactNode;

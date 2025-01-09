@@ -16,7 +16,6 @@ import rehypeStringify from 'rehype-stringify';
 import rehypeKatex from 'rehype-katex';
 import BlogContainer from '@/app/components/sidebar/BlogContainer';
 import 'katex/dist/katex.min.css';
-import { visit } from 'unist-util-visit';
 import '../../components/blog/wp-dark.css';
 import { getAllPosts } from '@/lib/getPosts';
 import { notFound } from 'next/navigation';
@@ -25,7 +24,11 @@ import PostNavigation from '@/app/components/blog/PostNavigation';
 
 const posts = getAllPosts();
 
-export default async function Post({ params }: { params: { slug: string } }) {
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export default async function Post({ params }: PageProps) {
   const { slug } = await params;
   
   const postsDirectory = path.join(process.cwd(), 'posts');
@@ -110,7 +113,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
         </article>
       </BlogContainer>
     );
-  } catch (error) {
+  } catch {
     notFound();
   }
 }

@@ -19,7 +19,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
         <CopyButton text={children} />
       </div>
       <Highlight theme={themes.vsDark} code={children.trim()} language={language || 'text'}>
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+        {({ style, tokens, getLineProps, getTokenProps }) => (
           <pre className="p-4 overflow-x-auto text-sm scrollbar" style={style}>
             {tokens.map((line, i) => (
               <div key={i} {...getLineProps({ line })}>

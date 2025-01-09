@@ -1,11 +1,16 @@
 import BlogContainer from "@/app/components/sidebar/BlogContainer";
 import { getAllPosts } from '@/lib/getPosts';
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import Image from "next/image";
+import { notFound } from 'next/navigation';
 
 const posts = getAllPosts();
 
 export default function BlogHomePage() {
+  if (!posts || posts.length === 0) {
+    notFound();
+  }
+
   const top3Posts = [...posts]
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
