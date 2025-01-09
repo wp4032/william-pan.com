@@ -5,18 +5,27 @@ import { useEffect, useState } from 'react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { SidebarTrigger } from '@/components/ui/sidebar';
 
-export default function BlogBreadcrumb() {
+export default function BlogBreadcrumb({ posts }: { posts: { title: string, url: string, subheadings: string[] }[] }) {
   const pathname = usePathname();
   const pathParts = pathname?.split('/').filter(Boolean);
   const [hash, setHash] = useState('');
 
   useEffect(() => {
-    setHash(window.location.hash.slice(1));
+    const handleHashChange = () => {
+      setHash(window.location.hash.slice(1));
+    };
+
+    handleHashChange(); // Initial hash
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Assuming the structure is /blog/[slug]#subheading
   const slug = pathParts?.[1] || '';
-  const subheading = hash || '';
+  const currentPost = posts.find(post => post.url === pathname);
+  const postTitle = currentPost?.title || '';
+  const currentSubheading = currentPost?.subheadings.find(heading => 
+    heading.toLowerCase().replace(/[^a-z0-9\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-') === hash
+  );
 
   return (
     <div className="flex items-center gap-4 px-4">
@@ -29,22 +38,22 @@ export default function BlogBreadcrumb() {
               Blog
             </BreadcrumbLink>
           </BreadcrumbItem>
-          {slug && (
+          {postTitle && (
             <>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem className="hidden md:block">
                 <BreadcrumbLink href={`/blog/${slug}`}>
-                  {slug}
+                  {postTitle}
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </>
           )}
-          {subheading && (
+          {currentSubheading && (
             <>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbLink href={`/blog/${slug}#${subheading}`}>
-                  {subheading}
+                <BreadcrumbLink href={`/blog/${slug}#${hash}`}>
+                  {currentSubheading}
                 </BreadcrumbLink>
               </BreadcrumbItem>
             </>

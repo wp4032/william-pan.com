@@ -19,8 +19,11 @@ import 'katex/dist/katex.min.css';
 import { visit } from 'unist-util-visit';
 import '../../components/blog/wp-dark.css';
 import { getAllPosts } from '@/lib/getPosts';
+import { notFound } from 'next/navigation';
+import { BlogHeader } from '@/app/components/sidebar/BlogHeader';
+import PostNavigation from '@/app/components/blog/PostNavigation';
 
-const posts = await getAllPosts();
+const posts = getAllPosts();
 
 export default async function Post({ params }: { params: { slug: string } }) {
   const { slug } = await params;
@@ -43,10 +46,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
       .use(rehypeKatex)
       .use(rehypeSlug)
       .use(rehypeAutolinkHeadings)
-      .use(rehypeHighlight, {
-        detect: true,
-        ignoreMissing: true,
-      })
+      .use(rehypeHighlight)
       .use(rehypeStringify)
       .process(matterResult.content);
 
@@ -56,16 +56,15 @@ export default async function Post({ params }: { params: { slug: string } }) {
       <BlogContainer home={false} posts={posts}>
         <article className="flex h-full flex-col pb-16 pt-16">
           <div className="flex-auto justify-start max-w-2xl lg:max-w-3xl lg:ml-24">
-            <h3 className="text-sm font-light mt-2 text-neutral-400">{matterResult.data.date}</h3>
-            <h1 className="text-5xl font-bold mt-4">{matterResult.data.title}</h1>
-            {matterResult.data.subtitle && (
-              <h2 className="text-xl font-md mt-4 text-neutral-400">{matterResult.data.subtitle}</h2>
-            )}
-            <hr className="my-4 border-neutral-800" />
-            <div className='h-4'></div>
+            <BlogHeader
+              date={matterResult.data.date}
+              title={matterResult.data.title}
+              subtitle={matterResult.data.subtitle}
+            />
 
             <div dangerouslySetInnerHTML={{ __html: contentHtml }} 
                     className="prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl 
+                    prose-h2:anchor-offset
                     prose-h1:font-bold prose-h2:font-semibold prose-h3:font-medium prose-h4:font-bold
                     prose-h1:my-6 prose-h2:my-4 prose-h3:my-4 prose-h4:my-4 prose-p:my-2
                     prose-headings:text-white prose-hr:my-6
@@ -91,6 +90,7 @@ export default async function Post({ params }: { params: { slug: string } }) {
                     [&_.task-list-item_input]:accent-white
                     prose-blockquote:border-l-2 prose-blockquote:border-neutral-800 prose-blockquote:pl-4 prose-blockquote:my-4 prose-blockquote:text-neutral-400 prose-blockquote:rounded-md
                     "/>
+            <PostNavigation currentSlug={slug} posts={posts} />
             <footer className="mt-16 flex items-center justify-between border-t border-neutral-800 pt-4">
               <div className="text-sm text-neutral-400">Copyright © 2025 William Pan. All rights reserved.</div>
               <div className="flex space-x-4">
@@ -111,6 +111,6 @@ export default async function Post({ params }: { params: { slug: string } }) {
       </BlogContainer>
     );
   } catch (error) {
-    throw new Error('Post not found');
+    notFound();
   }
 }

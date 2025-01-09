@@ -103,6 +103,17 @@ a {
   margin: 4rem 6rem;
 }
 
+.anchor-offset {
+  position: relative;
+}
+
+.anchor-offset::before {
+  content: '';
+  display: block;
+  height: 100px; /* Adjust this value to your desired offset */
+  margin-top: -100px; /* Negative margin to pull the content back up */
+}
+
 @media screen and (max-width: 900px) {
   .section__padding {
     padding: 4rem 4rem 0rem 4rem;
@@ -162,7 +173,7 @@ a {
     @apply bg-background text-foreground;
   }
   :root {
-    --sidebar-background: 240 5.9% 10%;
+    --sidebar-background: 0 0% 0% 0.75;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 240 5.9% 10%;
     --sidebar-primary-foreground: 0 0% 100%;

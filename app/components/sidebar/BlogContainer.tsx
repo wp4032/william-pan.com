@@ -11,25 +11,30 @@ interface FlexibleLayoutProps {
   home: boolean;
   posts: { title: string, url: string, subheadings: string[] }[];
 }
-
 export default function BlogContainer({ children, home, posts }: FlexibleLayoutProps) {
+  // Ensure posts is defined before passing to components
+  const safePosts = posts || [];
 
   return (
-    <>
+    <div className="flex">
       <CopyButtonScript />
       <SidebarProvider>
-        <AppSidebar posts={posts}/>
+        <AppSidebar posts={safePosts}/>
         <SidebarInset>
           {!home && (
-            <header className="flex h-16 shrink-0 items-center gap-2 border-b">
-              <BlogBreadcrumb />
+            <header className="flex h-16 shrink-0 items-center gap-2 border-b sticky top-0 z-10 backdrop-blur-[40px]">
+              <div className="max-w-7xl mx-auto w-full">
+                <BlogBreadcrumb posts={safePosts}/>
+              </div>
             </header>
           )}
           <div className="flex flex-1 flex-col gap-4 p-4">
-            {children}
+            <div className="max-w-7xl mx-auto w-full">
+              {children}
+            </div>
           </div>
         </SidebarInset>
       </SidebarProvider>
-    </>
+    </div>
   );
 }

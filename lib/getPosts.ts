@@ -17,7 +17,7 @@ function getSubheadings(content: string): string[] {
 
 export function getAllPosts() {
   const postsDirectory = path.join(process.cwd(), 'posts');
-  const allPosts: {title: string, url: string, subheadings: string[]}[] = [];
+  const allPosts: {title: string, url: string, slug: string, subheadings: string[]}[] = [];
 
   const files = fs.readdirSync(postsDirectory);
 
@@ -26,13 +26,14 @@ export function getAllPosts() {
       const id = file.replace(/\.md$/, '');
       const fullPath = path.join(postsDirectory, file);
       const fileContents = fs.readFileSync(fullPath, 'utf8');
-      const { content } = matter(fileContents);
+      const { data, content } = matter(fileContents);
       const subheadings = getSubheadings(content);
       
       allPosts.push({
-        title: id,
+        title: data.title,
         url: `/blog/${id}`,
-        subheadings
+        slug: id,
+        subheadings, 
       });
     }
   });

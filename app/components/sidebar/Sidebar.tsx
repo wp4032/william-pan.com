@@ -36,8 +36,31 @@ function sanitizeForUrl(text: string): string {
 export function AppSidebar({ posts, ...props }: { posts: { title: string, url: string, subheadings: string[] }[] }) {
   const pathname = usePathname();
 
+  React.useEffect(() => {
+    const adjustScrollPosition = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          window.scrollTo({
+            top: element.offsetTop - 200,
+            behavior: 'smooth'
+          });
+        }
+      }
+    };
+
+    adjustScrollPosition();
+
+    window.addEventListener('hashchange', adjustScrollPosition);
+
+    return () => {
+      window.removeEventListener('hashchange', adjustScrollPosition);
+    };
+  }, []);
+
   return (
-    <Sidebar {...props} collapsible="offcanvas">
+    <Sidebar {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -72,33 +95,45 @@ export function AppSidebar({ posts, ...props }: { posts: { title: string, url: s
               <hr className="my-2 border-sidebar-border" />
             </SidebarMenuItem>
             {posts.map((post) => (
-              <Collapsible key={post.title} className="group/collapsible" defaultOpen={pathname === post.url}>
-                <SidebarMenuItem>
-                  <CollapsibleTrigger asChild>
+              post.subheadings.length > 0 ? (
+                <Collapsible key={post.title} className="group/collapsible" defaultOpen={pathname === post.url}>
+                  <SidebarMenuItem>
+
                     <SidebarMenuButton>
                       <div className="font-medium flex items-center w-full">
                         <a href={post.url} className="flex-grow">
                           {post.title}
                         </a>
-                        <ChevronDown className="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                        <CollapsibleTrigger asChild>
+                          <ChevronDown className="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />
+                        </CollapsibleTrigger>
                       </div>
                     </SidebarMenuButton>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent>
-                    <SidebarMenuSub>
-                      {post.subheadings.map((heading, index) => (
-                        <SidebarMenuSubItem key={index}>
-                          <SidebarMenuSubButton asChild>
-                            <a href={`${post.url}#${sanitizeForUrl(heading)}`} className="text-sm">
-                              {heading}
-                            </a>
-                          </SidebarMenuSubButton>
-                        </SidebarMenuSubItem>
-                      ))}
-                    </SidebarMenuSub>
-                  </CollapsibleContent>
+                    
+                    <CollapsibleContent>
+                      <SidebarMenuSub>
+                        {post.subheadings.map((heading, index) => (
+                          <SidebarMenuSubItem key={index}>
+                            <SidebarMenuSubButton asChild>
+                              <a href={`${post.url}#${sanitizeForUrl(heading)}`} className="text-sm">
+                                {heading}
+                              </a>
+                            </SidebarMenuSubButton>
+                          </SidebarMenuSubItem>
+                        ))}
+                      </SidebarMenuSub>
+                    </CollapsibleContent>
+                  </SidebarMenuItem>
+                </Collapsible>
+              ) : (
+                <SidebarMenuItem key={post.title}>
+                  <SidebarMenuButton asChild>
+                    <a href={post.url} className="font-medium">
+                      {post.title}
+                    </a>
+                  </SidebarMenuButton>
                 </SidebarMenuItem>
-              </Collapsible>
+              )
             ))}
           </SidebarMenu>
         </SidebarGroup>
