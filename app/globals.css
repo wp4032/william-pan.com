@@ -114,6 +114,25 @@ a {
   margin-top: -100px; /* Negative margin to pull the content back up */
 }
 
+.katex-display {
+  overflow-x: auto; /* Allows horizontal scrolling if content overflows */
+  overflow-y: hidden; /* Hides vertical overflow */
+  max-width: 100%;  /* Ensures the container doesn't exceed the screen width */
+  white-space: nowrap; /* Prevents text from wrapping */
+  box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+  background-color: rgb(38 38 38 / var(--tw-bg-opacity, 0.4)); /* Dark background color */
+  border-radius: 0.5rem; /* Rounded corners */
+  padding: 1rem; /* Add some padding */
+  border: 1px solid #444;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+  /* Add inner shadow to fade out overflowing text */
+}
+
+.katex-display::-webkit-scrollbar {
+  display: none;
+}
+
 @media screen and (max-width: 900px) {
   .section__padding {
     padding: 4rem 4rem 0rem 4rem;
@@ -173,7 +192,7 @@ a {
     @apply bg-background text-foreground;
   }
   :root {
-    --sidebar-background: 0 0% 0% 0.75;
+    --sidebar-background: 240 10% 4%;
     --sidebar-foreground: 240 4.8% 95.9%;
     /* --sidebar-primary: 240 5.9% 10%; */
     --sidebar-primary-foreground: 0 0% 100%;

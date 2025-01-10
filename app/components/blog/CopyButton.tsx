@@ -24,7 +24,7 @@ export function CopyButton({ text }: CopyButtonProps) {
       onClick={copy}
       className="flex flex-row items-center gap-2 z-20 rounded-md  text-xs"
     >
-      {isCopied ? <Check className="h-3 w-3" /> : <Copy className="h-3 w-3" />}
+      {isCopied ? <Check className="md:h-3 md:w-3" /> : <Copy className="h-3 w-3" />}
       {isCopied ? "Copied" : "Copy code"}
     </button>
   )

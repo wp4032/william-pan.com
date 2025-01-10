@@ -33,7 +33,7 @@ function sanitizeForUrl(text: string): string {
     .replace(/-+/g, '-');
 }
 
-export function AppSidebar({ posts, ...props }: { posts: { title: string, url: string, subheadings: string[] }[] }) {
+export function AppSidebar({ posts, collaspsible, ...props }: { posts: { title: string, url: string, subheadings: string[] }[], collaspsible: boolean }) {
   const pathname = usePathname();
 
   React.useEffect(() => {
@@ -60,7 +60,7 @@ export function AppSidebar({ posts, ...props }: { posts: { title: string, url: s
   }, []);
 
   return (
-    <Sidebar {...props}>
+    <Sidebar {...props} collapsible={collaspsible ? 'offcanvas' : 'none'} className={collaspsible ? 'border-r-0' : 'border-r'}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
