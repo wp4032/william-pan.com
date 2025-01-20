@@ -22,6 +22,7 @@ import { notFound } from 'next/navigation';
 import { BlogHeader } from '@/app/components/sidebar/BlogHeader';
 import PostNavigation from '@/app/components/blog/PostNavigation';
 import { visit } from 'unist-util-visit';
+import { Root, Element } from 'hast';
 const posts = getAllPosts();
 
 interface PageProps {
@@ -29,12 +30,12 @@ interface PageProps {
 }
 
 const idSlug = () => {
-  return (tree: any) => {
-    visit(tree, 'element', (node: any) => {
+  return (tree: Root) => {
+    visit(tree, 'element', (node: Element) => {
       if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(node.tagName)) {
         if (node.properties && node.properties.id) {
-          let id = node.properties.id;
-          if (/^\d/.test(id)) {
+          const id = node.properties.id;
+          if (typeof id === 'string' && /^\d/.test(id)) {
             node.properties.id = `id-${id}`; // Prepend "id-" if the ID starts with a number
           }
         }

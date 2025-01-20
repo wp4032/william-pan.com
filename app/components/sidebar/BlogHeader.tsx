@@ -1,7 +1,8 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ShareIcon } from "lucide-react"
+import { ShareIcon, CheckCircle } from "lucide-react"
+import { useState } from "react";
 
 interface BlogHeaderProps {
   date: string
@@ -10,6 +11,14 @@ interface BlogHeaderProps {
 }
 
 export function BlogHeader({ date, title, subtitle }: BlogHeaderProps) {
+  const [copied, setCopied] = useState(false);
+
+  const handleShareClick = () => {
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000); // Reset copied state after 2 seconds
+  };
+
   return (
     <div className="flex-auto justify-start">
       <h3 className="text-sm font-light mt-2 text-neutral-400">{date}</h3>
@@ -22,12 +31,19 @@ export function BlogHeader({ date, title, subtitle }: BlogHeaderProps) {
           variant="outline"
           size="sm"
           className="text-xs md:text-sm rounded-[0.5rem]"
-          onClick={() => {
-            navigator.clipboard.writeText(window.location.href);
-          }}
+          onClick={handleShareClick}
         >
-          <ShareIcon className="mr-2 h-2 w-2 md:h-4 md:w-4" />
-          Share this post
+          {copied ? (
+            <>
+              <CheckCircle className="mr-2 h-2 w-2 md:h-4 md:w-4" />
+              Link copied!
+            </>
+          ) : (
+            <>
+              <ShareIcon className="mr-2 h-2 w-2 md:h-4 md:w-4" />
+              Share this post
+            </>
+          )}
         </Button>
       </div>
       <hr className="my-4 border-neutral-800" />

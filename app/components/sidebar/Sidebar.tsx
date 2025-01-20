@@ -40,10 +40,11 @@ export function AppSidebar({ posts, collaspsible, ...props }: { posts: { title: 
     const adjustScrollPosition = () => {
       const hash = window.location.hash;
       if (hash) {
-        const element = document.querySelector(hash);
+        const sanitizedHash = CSS.escape(hash.substring(1));
+        const element = document.querySelector(`#${sanitizedHash}`);
         if (element && element instanceof HTMLElement) {
           window.scrollTo({
-            top: element.offsetTop, // Removed the additional padding
+            top: element.offsetTop,
             behavior: 'smooth'
           });
         }

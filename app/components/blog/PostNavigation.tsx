@@ -3,6 +3,7 @@ import Link from 'next/link';
 interface Post {
   slug: string;
   title: string;
+  sidebar: string;
 }
 
 interface PostNavigationProps {
@@ -20,7 +21,7 @@ const PostNavigation: React.FC<PostNavigationProps> = ({ currentSlug, posts }) =
       {prevPost ? (
         <Link href={`/blog/${prevPost.slug}`}>
           <p className="text-neutral-400 hover:text-white transition-colors">
-            ← {prevPost.title}
+            ← {prevPost.sidebar}
           </p>
         </Link>
       ) : (
@@ -29,7 +30,7 @@ const PostNavigation: React.FC<PostNavigationProps> = ({ currentSlug, posts }) =
       {nextPost ? (
         <Link href={`/blog/${nextPost.slug}`}>
           <p className="text-neutral-400 hover:text-white transition-colors">
-            {nextPost.title} →
+            {nextPost.sidebar} →
           </p>
         </Link>
       ) : (
