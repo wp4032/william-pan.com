@@ -16,7 +16,7 @@ export default function BlogHomePage() {
     .slice(0, 3);
 
   return (
-    <BlogContainer home={true} posts={posts} collaspsible={false}>
+    <BlogContainer home={false} posts={posts} collaspsible={true}>
       <div className="text-white p-6 md:p-8 lg:p-12">
         {/* Header */}
         <header className="mb-8 md:mb-8">
@@ -49,7 +49,7 @@ export default function BlogHomePage() {
                 <div className="flex items-center gap-3">
                   <div>
                     <div className="text-sm">By William Pan</div>
-                    <div className="text-xs text-gray-400">{top3Posts[0].minutes} minutes read</div>
+                    <div className="text-xs text-gray-400">{top3Posts[0].minutes} minute read</div>
                   </div>
                 </div>
               </div>
@@ -76,7 +76,7 @@ export default function BlogHomePage() {
                       <div className="flex items-center gap-3">
                         <div>
                           <div className="text-sm">By William Pan</div>
-                          <div className="text-xs text-gray-400">{top3Posts[1].minutes} minutes read</div>
+                          <div className="text-xs text-gray-400">{top3Posts[1].minutes} minute read</div>
                         </div>
                       </div>
                     </a>
@@ -98,7 +98,7 @@ export default function BlogHomePage() {
                       <div className="flex items-center gap-3">
                         <div>
                           <div className="text-sm">By William Pan</div>
-                          <div className="text-xs text-gray-400">{top3Posts[2].minutes} minutes read</div>
+                          <div className="text-xs text-gray-400">{top3Posts[2].minutes} minute read</div>
                         </div>
                       </div>
                     </a>

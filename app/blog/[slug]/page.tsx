@@ -76,11 +76,12 @@ export default async function Post({ params }: PageProps) {
     return (
       <BlogContainer home={false} posts={posts} collaspsible={true}>
         <article className="flex h-full flex-col pb-16 pt-16">
-          <div className="flex-auto justify-start max-w-screen-sm md:max-w-md lg:max-w-lg xl:max-w-3xl mx-4 lg:ml-24">
+          <div className="flex-auto justify-start max-w-screen-sm md:max-w-md lg:max-w-lg xl:max-w-3xl mx-auto">
             <BlogHeader
               date={matterResult.data.date}
               title={matterResult.data.title}
               subtitle={matterResult.data.subtitle}
+              minutes={matterResult.data.minutes}
             />
 
             <div dangerouslySetInnerHTML={{ __html: contentHtml }} 
