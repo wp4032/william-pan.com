@@ -26,6 +26,7 @@
 
 html {
   color-scheme: dark;
+  scroll-padding-top: 125px;
 }
 
 body {

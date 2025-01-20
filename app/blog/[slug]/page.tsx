@@ -21,12 +21,28 @@ import { getAllPosts } from '@/lib/getPosts';
 import { notFound } from 'next/navigation';
 import { BlogHeader } from '@/app/components/sidebar/BlogHeader';
 import PostNavigation from '@/app/components/blog/PostNavigation';
-
+import { visit } from 'unist-util-visit';
 const posts = getAllPosts();
 
 interface PageProps {
   params: Promise<{ slug: string }>;
 }
+
+const idSlug = () => {
+  return (tree: any) => {
+    visit(tree, 'element', (node: any) => {
+      if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(node.tagName)) {
+        if (node.properties && node.properties.id) {
+          let id = node.properties.id;
+          if (/^\d/.test(id)) {
+            node.properties.id = `id-${id}`; // Prepend "id-" if the ID starts with a number
+          }
+        }
+      }
+    });
+  };
+};
+
 
 export default async function Post({ params }: PageProps) {
   const { slug } = await params;
@@ -48,6 +64,7 @@ export default async function Post({ params }: PageProps) {
       .use(rehypeRaw)
       .use(rehypeKatex)
       .use(rehypeSlug)
+      .use(idSlug)
       .use(rehypeAutolinkHeadings)
       .use(rehypeHighlight)
       .use(rehypeStringify)
@@ -66,12 +83,12 @@ export default async function Post({ params }: PageProps) {
             />
 
             <div dangerouslySetInnerHTML={{ __html: contentHtml }} 
-                    className="prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl 
+                    className="prose-h1:text-3xl prose-h2:text-2xl prose-h3:text-xl prose-h4:text-lg 
                     prose-h2:anchor-offset
-                    prose-h1:font-bold prose-h2:font-semibold prose-h3:font-medium prose-h4:font-bold
-                    prose-h1:my-6 prose-h2:my-4 prose-h3:my-4 prose-h4:my-4 prose-p:my-2
+                    prose-h1:font-bold prose-h2:font-semibold prose-h3:font-medium prose-h4:font-medium
+                    prose-h1:my-6 prose-h1:mt-12 prose-h2:my-4 prose-h2:mt-8 prose-h3:my-4 prose-h4:my-4 prose-p:my-2
                     prose-headings:text-white prose-hr:my-6
-                    prose-pre:bg-neutral-800 prose-pre:rounded-[0.5rem]
+                    prose-pre:my-6 prose-pre:bg-neutral-800 prose-pre:rounded-[0.5rem]
                     prose-code:bg-neutral-800 prose-code:rounded-[0.5rem] prose-code:px-2 prose-code:py-1 prose-code:my-2  prose-code:text-sm
                     prose-a:text-white prose-a:underline prose-a:decoration-white/75 prose-a:underline-offset-4 hover:prose-a:decoration-white prose-a:transition-all
                     prose-ul:list-none prose-ul:pl-0

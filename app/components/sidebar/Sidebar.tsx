@@ -26,14 +26,14 @@ import {
 import Link from "next/link";
 
 function sanitizeForUrl(text: string): string {
-  return text
+  return `id-${text
     .toLowerCase()
     .replace(/[^a-z0-9\s-]/g, '')
     .replace(/\s+/g, '-')
-    .replace(/-+/g, '-');
+    .replace(/-+/g, '-')}`;
 }
 
-export function AppSidebar({ posts, collaspsible, ...props }: { posts: { title: string, url: string, subheadings: string[] }[], collaspsible: boolean }) {
+export function AppSidebar({ posts, collaspsible, ...props }: { posts: { title: string, url: string, subheadings: string[], sidebar: string }[], collaspsible: boolean }) {
   const pathname = usePathname();
 
   React.useEffect(() => {
@@ -43,7 +43,7 @@ export function AppSidebar({ posts, collaspsible, ...props }: { posts: { title: 
         const element = document.querySelector(hash);
         if (element && element instanceof HTMLElement) {
           window.scrollTo({
-            top: element.offsetTop - 200,
+            top: element.offsetTop, // Removed the additional padding
             behavior: 'smooth'
           });
         }
@@ -101,8 +101,8 @@ export function AppSidebar({ posts, collaspsible, ...props }: { posts: { title: 
 
                     <SidebarMenuButton>
                       <div className="font-medium flex items-center w-full">
-                        <Link href={post.url} className="flex-grow">
-                          {post.title}
+                        <Link href={post.url} className="w-[85%]">
+                          {post.sidebar}
                         </Link>
                         <CollapsibleTrigger asChild>
                           <ChevronDown className="ml-auto h-4 w-4 transition-transform group-data-[state=open]/collapsible:rotate-180" />

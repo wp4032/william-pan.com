@@ -25,6 +25,7 @@ export function getAllPosts() {
     subheadings: string[], 
     subtitle: string, 
     minutes: string, 
+    sidebar: string,
     image: string}[] = [];
 
   const files = fs.readdirSync(postsDirectory);
@@ -46,6 +47,7 @@ export function getAllPosts() {
         subheadings, 
         minutes: data.minutes,
         image: data.image,
+        sidebar: data.sidebar,
       });
     }
   });

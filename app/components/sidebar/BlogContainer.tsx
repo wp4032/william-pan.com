@@ -8,7 +8,7 @@ import { CopyButtonScript } from '../blog/CopyButtonScript'
 interface FlexibleLayoutProps {
   children: React.ReactNode;
   home: boolean;
-  posts: { title: string, url: string, subheadings: string[] }[];
+  posts: { title: string, url: string, subheadings: string[], sidebar: string }[];
   collaspsible: boolean;
 }
 export default function BlogContainer({ children, home, posts, collaspsible }: FlexibleLayoutProps) {

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbSeparator } from "@/components/ui/breadcrumb";
 import { SidebarTrigger } from '@/components/ui/sidebar';
 
-export default function BlogBreadcrumb({ posts }: { posts: { title: string, url: string, subheadings: string[] }[] }) {
+export default function BlogBreadcrumb({ posts }: { posts: { title: string, url: string, subheadings: string[], sidebar: string }[] }) {
   const pathname = usePathname();
   const pathParts = pathname?.split('/').filter(Boolean);
   const [currentHeading, setCurrentHeading] = useState('');
@@ -37,7 +37,7 @@ export default function BlogBreadcrumb({ posts }: { posts: { title: string, url:
 
   const slug = pathParts?.[1] || '';
   const currentPost = posts.find(post => post.url === pathname);
-  const postTitle = currentPost?.title || '';
+  const postTitle = currentPost?.sidebar || '';
 
   return (
     <div className="flex items-center gap-4 px-4">
