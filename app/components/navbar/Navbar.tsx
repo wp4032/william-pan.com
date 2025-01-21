@@ -5,7 +5,7 @@ import { motion } from 'framer-motion'
 import './navbar.css'
 import Image from 'next/image';
 import Logo from '@/public/logo_white.png'
-
+import Link from 'next/link';
 import React from 'react'
 
 interface MenuProps {
@@ -14,11 +14,11 @@ interface MenuProps {
 
 const Menu: React.FC<MenuProps> = ({ setToggleMenu }) => (
   <>
-    <p><a href="#home" onClick={() => setToggleMenu(false)}>Home</a></p>
-    <p><a href="#ventures" onClick={() => setToggleMenu(false)}>Ventures</a></p>
-    <p><a href="#science" onClick={() => setToggleMenu(false)}>Science</a></p>
-    <p><a href="#design" onClick={() => setToggleMenu(false)}>Design</a></p>
-    {/* <p><a href="#news" onClick={() => setToggleMenu(false)}>News</a></p> */}
+    <p><Link href="/" onClick={() => setToggleMenu(false)}>Home</Link></p>
+    <p><Link href="/#ventures" onClick={() => setToggleMenu(false)}>Ventures</Link></p>
+    <p><Link href="/#science" onClick={() => setToggleMenu(false)}>Science</Link></p>
+    <p><Link href="/#design" onClick={() => setToggleMenu(false)}>Design</Link></p>
+    <p><Link href="/blog" onClick={() => setToggleMenu(false)}>Blog</Link></p>
   </>
 );
 

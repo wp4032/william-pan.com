@@ -3,6 +3,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { CounterAPI } from 'counterapi';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  // Check if request is from home page by checking referer
+  const referer = req.headers.referer;
+  if (!referer || !referer.endsWith('/')) {
+    return res.status(403).json({ error: 'Access denied' });
+  }
+
   try {
     const counter = new CounterAPI(); // Initialize the CounterAPI
 
