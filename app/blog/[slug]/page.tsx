@@ -5,7 +5,7 @@ import { unified } from 'unified';
 import remarkParse from 'remark-parse';
 import remarkGfm from 'remark-gfm';
 import remarkImages from 'remark-images';
-import remarkEmoji from 'remark-emoji';
+// import remarkEmoji from 'remark-emoji';
 import remarkMath from 'remark-math';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
@@ -22,9 +22,7 @@ import { BlogHeader } from '@/app/components/sidebar/BlogHeader';
 import PostNavigation from '@/app/components/blog/PostNavigation';
 import { visit } from 'unist-util-visit';
 import { Root, Element } from 'hast';
-import { InputMatrix } from '@/app/components/nnaccelerator/InputMatrix';
 import { BlogContent } from '@/app/components/blog/BlogContent';
-import { CodeBlock } from '@/app/components/blog/CodeBlock';
 
 const posts = getAllPosts();
 
@@ -50,7 +48,7 @@ const idSlug = () => {
 // Add this type definition
 type CustomComponent = {
   name: string;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
 };
 
 // Add this function to parse custom component syntax
@@ -58,19 +56,18 @@ function parseCustomComponent(line: string): CustomComponent | null {
   const match = line.match(/<(\w+)\s*(.*)\/>/);
   if (!match) return null;
 
-  const [_, name, propsString] = match;
-  const props: Record<string, any> = {};
-  
+  const [, name, propsString] = match;
+  const props: Record<string, unknown> = {};
   // Updated regex to handle both JSON-like values in {} and regular string values in ""
   const propMatches = propsString.matchAll(/(\w+)=(?:{([^}]+)}|"([^"]*)")/g);
   
-  for (const [__, key, jsonValue, stringValue] of propMatches) {
+  for (const [, key, jsonValue, stringValue] of propMatches) {
     if (jsonValue !== undefined) {
       try {
         // Handle JSON-like values (arrays, booleans, numbers)
         props[key] = JSON.parse(jsonValue.replace(/'/g, '"'));
       } catch (e) {
-        console.error(`Failed to parse JSON value for ${key}:`, jsonValue);
+        console.error(e, `Failed to parse JSON value for ${key}:`, jsonValue);
         props[key] = jsonValue;
       }
     } else {
@@ -86,9 +83,9 @@ function parseCustomComponent(line: string): CustomComponent | null {
 }
 
 // Add this component map
-const ComponentMap: Record<string, React.ComponentType<any>> = {
-  InputMatrix: InputMatrix,
-};
+// const ComponentMap: Record<string, React.ComponentType<any>> = {
+//   InputMatrix: InputMatrix,
+// };
 
 export default async function Post({ params }: PageProps) {
   const { slug } = await params;
@@ -101,20 +98,20 @@ export default async function Post({ params }: PageProps) {
     const matterResult = matter(fileContents);
 
     // Process the entire content first
-    const processedContent = await unified()
-      .use(remarkParse)
-      .use(remarkGfm)
-      .use(remarkMath)
-      .use(remarkImages)
-      .use(remarkEmoji)
-      .use(remarkRehype, { allowDangerousHtml: true })
-      .use(rehypeRaw)
-      .use(rehypeKatex)
-      .use(rehypeSlug)
-      .use(idSlug)
-      .use(rehypeAutolinkHeadings)
-      .use(rehypeStringify)
-      .process(matterResult.content);
+    // const processedContent = await unified()
+    //   .use(remarkParse)
+    //   .use(remarkGfm)
+    //   .use(remarkMath)
+    //   .use(remarkImages)
+    //   .use(remarkEmoji)
+    //   .use(remarkRehype, { allowDangerousHtml: true })
+    //   .use(rehypeRaw)
+    //   .use(rehypeKatex)
+    //   .use(rehypeSlug)
+    //   .use(idSlug)
+    //   .use(rehypeAutolinkHeadings)
+    //   .use(rehypeStringify)
+    //   .process(matterResult.content);
 
     // Split content by custom components while preserving code blocks
     const contentStr = matterResult.content;

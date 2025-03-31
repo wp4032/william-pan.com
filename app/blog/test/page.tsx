@@ -1,11 +1,8 @@
 'use client'
 
 import BlogContainer from '@/app/components/sidebar/BlogContainer';
-import { MACUnit } from '@/app/components/nnaccelerator/MACUnit';
-import { MiniMACUnit } from '@/app/components/nnaccelerator/MACUnit';
 import { SystolicArray } from '@/app/components/nnaccelerator/SystolicArray';
 import { useEffect, useState } from 'react';
-import { Matrix } from '@/app/components/nnaccelerator/Matrix';
 import { OutputMatrix } from '@/app/components/nnaccelerator/OutputMatrix';
 import { InputMatrix } from '@/app/components/nnaccelerator/InputMatrix';
 import { MACUnitGrid } from '@/app/components/nnaccelerator/MACUnitGrid';
@@ -20,7 +17,7 @@ export default function Post() {
   const debug = false; // Manual debug flag
 
   // Function to generate random inputs/weights
-  const getRandomValues = (size: number) => Array(size).fill(0).map(() => +(Math.random() * 2 - 1).toFixed(2));
+  // const getRandomValues = (size: number) => Array(size).fill(0).map(() => +(Math.random() * 2 - 1).toFixed(2));
 
   useEffect(() => {
     const newArray = new SystolicArray(size, size);
@@ -30,7 +27,7 @@ export default function Post() {
     // const weight_buf = Array.from({ length: size }, () => getRandomValues(size));
     const weight_buf = [[1, 2], [2, 1]];
     newArray.load_weights(weight_buf);
-    const weight_counter = newArray.weight_counter;
+    // const weight_counter = newArray.weight_counter;
     setArray(newArray);
   }, [size]);
 
@@ -187,9 +184,9 @@ export default function Post() {
               animationState={animationPhase}
               weight_counter={array?.weight_counter}
               systolic_array_size={size}
-              ref={(matrixRef) => {
-                // You can access matrix values using matrixRef.getValues()
-              }}
+              // ref={(matrixRef) => {
+              //   // You can access matrix values using matrixRef.getValues()
+              // }}
             />
           </div>
           
@@ -206,9 +203,9 @@ export default function Post() {
                 animationState={animationPhase}
                 weight_counter={array?.weight_counter}
                 systolic_array_size={size}
-                ref={(matrixRef) => {
-                  // You can access matrix values using matrixRef.getValues()
-                }}
+                // ref={(matrixRef) => {
+                //   // You can access matrix values using matrixRef.getValues()
+                // }}
               />
             </div>
             
