@@ -1,0 +1,3 @@
+[submodule "app/components/nnaccelerator"]
+	path = app/components/nnaccelerator
+	url = https://github.com/wp4032/systolic-array-simulator
