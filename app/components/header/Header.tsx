@@ -107,15 +107,13 @@ const Header = () => {
         <div className="flex flex-wrap flex-row justify-start items-start lg:items-center gap-x-8 w-full lg:h-auto">
           {/* Title & Contact Form Section */}
           <div className="w-full lg:w-[48%] h-[105vh] lg:h-[95vh] flex flex-col items-center justify-center px-4 lg:px-0">
-            <h1 className="font-bold text-4xl md:text-5xl leading-[44px] md:leading-[52px] tracking-[0.01em] text-center lg:text-left text-white max-w-[90%] md:max-w-full">
-              The intersection of innovation, entrepreneurship, engineering, and
-              design.
+            <h1 className="font-bold text-4xl md:text-5xl leading-[44px] md:leading-[52px] tracking-[0.01em] text-center lg:text-left xl:text-left 2xl:text-left text-white max-w-[90%] md:max-w-full">
+              {/* Designing, building, shipping. Repeat. */}
+              Heads down building hardware that matters.
             </h1>
             <p className="text-white text-base md:text-[18px] leading-6 mt-8 lg:mr-16 text-center lg:text-left max-w-[90%] md:max-w-full">
-              William Pan is a junior at Stanford University studying mechanical
-              engineering, electrical engineering, and computer science. His
-              goal in life is to change the world through science-based
-              technologies and purposeful ventures.
+              I am a full-stack mechanical engineer, electrical engineer, and software developer from Stanford University.
+              I&apos;m passionate to change the world through science-based technologies and purposeful ventures.
             </p>
             <div className="mt-2 lg:mt-6 w-full max-w-[90%] md:max-w-full flex justify-center lg:justify-start">
               <ContactForm />
