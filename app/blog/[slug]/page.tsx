@@ -9,7 +9,6 @@ import remarkEmoji from 'remark-emoji';
 import remarkMath from 'remark-math';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
-import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
@@ -25,6 +24,7 @@ import { visit } from 'unist-util-visit';
 import { Root, Element } from 'hast';
 import { InputMatrix } from '@/app/components/nnaccelerator/InputMatrix';
 import { BlogContent } from '@/app/components/blog/BlogContent';
+import { CodeBlock } from '@/app/components/blog/CodeBlock';
 
 const posts = getAllPosts();
 
@@ -106,13 +106,13 @@ export default async function Post({ params }: PageProps) {
       .use(remarkGfm)
       .use(remarkMath)
       .use(remarkImages)
+      .use(remarkEmoji)
       .use(remarkRehype, { allowDangerousHtml: true })
       .use(rehypeRaw)
       .use(rehypeKatex)
       .use(rehypeSlug)
       .use(idSlug)
       .use(rehypeAutolinkHeadings)
-      .use(rehypeHighlight)
       .use(rehypeStringify)
       .process(matterResult.content);
 
@@ -142,7 +142,6 @@ export default async function Post({ params }: PageProps) {
             .use(rehypeSlug)
             .use(idSlug)
             .use(rehypeAutolinkHeadings)
-            .use(rehypeHighlight)
             .use(rehypeStringify)
             .process(currentBlock);
           
@@ -165,11 +164,53 @@ export default async function Post({ params }: PageProps) {
         if (!isInCodeBlock) {
           // Starting a new code block
           isInCodeBlock = true;
-          currentBlock += line + '\n';
+          // Clear the current block and start fresh with this line
+          if (currentBlock.trim()) {
+            const processed = await unified()
+              .use(remarkParse)
+              .use(remarkGfm)
+              .use(remarkMath)
+              .use(remarkImages)
+              .use(remarkRehype, { allowDangerousHtml: true })
+              .use(rehypeRaw)
+              .use(rehypeKatex)
+              .use(rehypeSlug)
+              .use(idSlug)
+              .use(rehypeAutolinkHeadings)
+              .use(rehypeStringify)
+              .process(currentBlock);
+            
+            processedLines.push({
+              type: 'markdown',
+              content: processed.toString()
+            });
+          }
+          currentBlock = line + '\n';
         } else {
           // Ending a code block
           isInCodeBlock = false;
           currentBlock += line + '\n';
+          
+          // Process the code block immediately
+          const processed = await unified()
+            .use(remarkParse)
+            .use(remarkGfm)
+            .use(remarkMath)
+            .use(remarkImages)
+            .use(remarkRehype, { allowDangerousHtml: true })
+            .use(rehypeRaw)
+            .use(rehypeKatex)
+            .use(rehypeSlug)
+            .use(idSlug)
+            .use(rehypeAutolinkHeadings)
+            .use(rehypeStringify)
+            .process(currentBlock);
+          
+          processedLines.push({
+            type: 'markdown',
+            content: processed.toString()
+          });
+          currentBlock = ''; // Reset current block
           continue;
         }
       } else {
@@ -191,7 +232,6 @@ export default async function Post({ params }: PageProps) {
             .use(rehypeSlug)
             .use(idSlug)
             .use(rehypeAutolinkHeadings)
-            .use(rehypeHighlight)
             .use(rehypeStringify)
             .process(currentBlock);
 

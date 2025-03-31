@@ -19,7 +19,6 @@ export function BlogContent({ processedLines }: { processedLines: any[] }) {
     prose-h1:font-bold prose-h2:font-semibold prose-h3:font-medium prose-h4:font-medium
     prose-h1:my-6 prose-h1:mt-12 prose-h2:my-4 prose-h2:mt-8 prose-h3:my-4 prose-h4:my-4 prose-p:my-2
     prose-headings:text-white prose-hr:my-6
-    prose-pre:my-6 prose-pre:bg-neutral-800 prose-pre:rounded-[0.5rem]
     prose-code:bg-neutral-800 prose-code:rounded-[0.5rem] prose-code:px-2 prose-code:py-1 prose-code:my-2  prose-code:text-sm
     prose-a:text-white prose-a:underline prose-a:decoration-white/75 prose-a:underline-offset-4 hover:prose-a:decoration-white prose-a:transition-all
     prose-ul:list-none prose-ul:pl-0
@@ -52,6 +51,64 @@ export function BlogContent({ processedLines }: { processedLines: any[] }) {
             <div key={index}>Unknown component: {line.component.name}</div>
           );
         }
+
+        // Parse the HTML string to find and replace code blocks
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(line.content, 'text/html');
+        const preElements = doc.querySelectorAll('pre');
+
+        if (preElements.length > 0) {
+          const contentPieces = [];
+          let currentPosition = 0;
+
+          Array.from(preElements).forEach((pre, preIndex) => {
+            const code = pre.querySelector('code');
+            
+            // Get the exact position of this pre element
+            const preStart = line.content.indexOf(pre.outerHTML);
+            
+            // Add any text that comes before this pre element
+            if (preStart > currentPosition) {
+              contentPieces.push(
+                <div key={`${index}-text-${preIndex}`} 
+                     dangerouslySetInnerHTML={{ 
+                       __html: line.content.slice(currentPosition, preStart) 
+                     }} 
+                />
+              );
+            }
+
+            // Add the code block, being careful to only include the actual code content
+            if (code) {
+              const language = code.className.replace('language-', '');
+              // Clean the code content by removing any trailing semicolons or extra content
+              const codeContent = (code.textContent || '').trim();
+              
+              contentPieces.push(
+                <CodeBlock key={`${index}-code-${preIndex}`} className={`language-${language}`}>
+                  {codeContent}
+                </CodeBlock>
+              );
+            }
+
+            // Update the current position to be exactly after this pre element
+            currentPosition = preStart + pre.outerHTML.length;
+          });
+
+          // Add any remaining text after the last pre element
+          if (currentPosition < line.content.length) {
+            contentPieces.push(
+              <div key={`${index}-text-final`} 
+                   dangerouslySetInnerHTML={{ 
+                     __html: line.content.slice(currentPosition) 
+                   }} 
+              />
+            );
+          }
+
+          return contentPieces;
+        }
+
         return (
           <div key={index} dangerouslySetInnerHTML={{ __html: line.content }} />
         );
