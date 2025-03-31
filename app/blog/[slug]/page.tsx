@@ -22,7 +22,7 @@ import { BlogHeader } from '@/app/components/sidebar/BlogHeader';
 import PostNavigation from '@/app/components/blog/PostNavigation';
 import { visit } from 'unist-util-visit';
 import { Root, Element } from 'hast';
-import { BlogContent } from '@/app/components/blog/BlogContent';
+import { BlogContent, BlogLine } from '@/app/components/blog/BlogContent';
 
 const posts = getAllPosts();
 
@@ -115,7 +115,7 @@ export default async function Post({ params }: PageProps) {
 
     // Split content by custom components while preserving code blocks
     const contentStr = matterResult.content;
-    const processedLines: Array<{ type: string; content?: string; component?: CustomComponent }> = [];
+    const processedLines: BlogLine[] = [];
     let currentBlock = '';
     let isInCodeBlock = false;
     
@@ -143,7 +143,7 @@ export default async function Post({ params }: PageProps) {
             .process(currentBlock);
           
           processedLines.push({
-            type: 'markdown',
+            type: 'text',
             content: processed.toString()
           });
           currentBlock = '';
@@ -178,7 +178,7 @@ export default async function Post({ params }: PageProps) {
               .process(currentBlock);
             
             processedLines.push({
-              type: 'markdown',
+              type: 'text',
               content: processed.toString()
             });
           }
@@ -204,7 +204,7 @@ export default async function Post({ params }: PageProps) {
             .process(currentBlock);
           
           processedLines.push({
-            type: 'markdown',
+            type: 'text',
             content: processed.toString()
           });
           currentBlock = ''; // Reset current block
@@ -233,7 +233,7 @@ export default async function Post({ params }: PageProps) {
             .process(currentBlock);
 
           processedLines.push({
-            type: 'markdown',
+            type: 'text',
             content: processed.toString()
           });
         }

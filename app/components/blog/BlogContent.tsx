@@ -1,21 +1,32 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { InputMatrix } from '@/app/components/nnaccelerator/InputMatrix';
+import { InputMatrix, MatrixProps } from '@/app/components/nnaccelerator/InputMatrix';
 import { CodeBlock } from '@/app/components/blog/CodeBlock';
-import SystolicSimulator from '../nnaccelerator/SystolicSimulator';
+import SystolicSimulator, { SystolicSimulatorProps } from '../nnaccelerator/SystolicSimulator';
 
-// type CustomComponent = {
-//   name: string;
-//   props: Record<string, any>;
-// };
+export type BlogLine = {
+  type: 'text' | 'component';  // strict union type
+  content?: string;
+  component?: {
+    name: string;
+    props: Record<string, unknown>;
+  };
+};
 
-const ComponentMap: Record<string, React.ComponentType<any>> = {
+interface ComponentProps {
+  InputMatrix: MatrixProps;
+  SystolicSimulator: SystolicSimulatorProps;
+}
+
+const ComponentMap: {
+  [K in keyof ComponentProps]: React.ComponentType<ComponentProps[K]>
+} = {
   InputMatrix: InputMatrix,
   SystolicSimulator: SystolicSimulator
 };
 
-export function BlogContent({ processedLines }: { processedLines: any[] }) {
+export function BlogContent({ processedLines }: { processedLines: BlogLine[] }) {
   const [parsedContent, setParsedContent] = useState<React.ReactNode[]>([]);
 
   useEffect(() => {
@@ -23,19 +34,19 @@ export function BlogContent({ processedLines }: { processedLines: any[] }) {
     const parseContent = () => {
       return processedLines.map((line, index) => {
         if (line.type === 'component') {
-          const Component = ComponentMap[line.component.name];
+          const Component = ComponentMap[line.component?.name as keyof ComponentProps];
           return Component ? (
             <div key={index} className="my-8">
-              <Component {...line.component.props} />
+              <Component {...(line.component?.props as ComponentProps[keyof ComponentProps])} />
             </div>
           ) : (
-            <div key={index}>Unknown component: {line.component.name}</div>
+            <div key={index}>Unknown component: {line.component?.name}</div>
           );
         }
 
         // Parse the HTML string to find and replace code blocks
         const parser = new DOMParser();
-        const doc = parser.parseFromString(line.content, 'text/html');
+        const doc = parser.parseFromString(line.content || '', 'text/html');
         const preElements = doc.querySelectorAll('pre');
 
         if (preElements.length > 0) {
@@ -46,14 +57,14 @@ export function BlogContent({ processedLines }: { processedLines: any[] }) {
             const code = pre.querySelector('code');
             
             // Get the exact position of this pre element
-            const preStart = line.content.indexOf(pre.outerHTML);
+            const preStart = (line.content || '').indexOf(pre.outerHTML);
             
             // Add any text that comes before this pre element
             if (preStart > currentPosition) {
               contentPieces.push(
                 <div key={`${index}-text-${preIndex}`} 
                      dangerouslySetInnerHTML={{ 
-                       __html: line.content.slice(currentPosition, preStart) 
+                       __html: (line.content || '').slice(currentPosition, preStart) 
                      }} 
                 />
               );
@@ -77,11 +88,11 @@ export function BlogContent({ processedLines }: { processedLines: any[] }) {
           });
 
           // Add any remaining text after the last pre element
-          if (currentPosition < line.content.length) {
+          if (currentPosition < (line.content || '').length) {
             contentPieces.push(
               <div key={`${index}-text-final`} 
                    dangerouslySetInnerHTML={{ 
-                     __html: line.content.slice(currentPosition) 
+                     __html: (line.content || '').slice(currentPosition) 
                    }} 
               />
             );
@@ -91,7 +102,7 @@ export function BlogContent({ processedLines }: { processedLines: any[] }) {
         }
 
         return (
-          <div key={index} dangerouslySetInnerHTML={{ __html: line.content }} />
+          <div key={index} dangerouslySetInnerHTML={{ __html: line.content || '' }} />
         );
       });
     };
@@ -134,7 +145,7 @@ export function BlogContent({ processedLines }: { processedLines: any[] }) {
             return <div key={index} className="h-32 bg-neutral-800/30 rounded-lg animate-pulse" />;
           }
           return (
-            <div key={index} dangerouslySetInnerHTML={{ __html: line.content }} />
+            <div key={index} dangerouslySetInnerHTML={{ __html: line.content || '' }} />
           );
         })}
       </div>

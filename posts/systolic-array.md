@@ -4,7 +4,7 @@ subtitle: 'A visual and intuitive guide to parallel computation in neural networ
 date: '2025-03-31'
 minutes: '8'
 image: '/blog/systolicarray/systolic_array_header.png'
-sidebar: 'Systolic Array 101'
+sidebar: 'How Systolic Arrays Work'
 ---
 
 ![systolic_array_header](/blog/systolicarray/systolic_array_header.png)
@@ -221,3 +221,5 @@ Still, when the workload fits, systolic arrays provide **best-in-class energy ef
 Feel free to play around with the systolic array below by clicking the right button to advance the systolic array and the left button to reverse a step!
 
 <SystolicSimulator frozen={false}/>
+
+The source code for this simulator is available on [GitHub](https://github.com/wp4032/william-pan.com/tree/main/app/components/nnaccelerator). Feel free to use it in your own projects or educational materials!
