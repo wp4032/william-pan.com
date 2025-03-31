@@ -13,7 +13,7 @@ export function CodeBlock({ children, className }: CodeBlockProps) {
   const language = className?.split(' ').find(c => c.startsWith('language-'))?.replace('language-', '') || ''
 
   return (
-    <div className="group relative rounded-[0.25rem] bg-[#1E1E1E] overflow-hidden border border-neutral-800">
+    <div className="group relative rounded-[0.25rem] bg-[#1E1E1E] overflow-hidden border border-neutral-700 my-4">
       <div className="flex items-center justify-between px-4 py-2 bg-[#2D2D2D]">
         <span className="text-sm text-gray-400">{language}</span>
         <CopyButton text={children} />

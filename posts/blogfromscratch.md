@@ -1,7 +1,7 @@
 ---
 title: 'Building a Blog from Scratch with the Future Model of Programming'
 subtitle: 'Built using NextJS, Tailwind CSS, and more...'
-date: '2024-01-20'
+date: '2025-01-20'
 minutes: '15'
 image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVAIHHph1avjN7Yr-r--0J5VHXlM-UhfdSJA&s'
 sidebar: 'Building a Blog from Scratch'
